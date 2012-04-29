@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Orangeui by brew20k</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Orangeui</h1>
+        <p>OrangeUI Web Framework 0.1</p>
+        <p class="view"><a href="https://github.com/brew20k/orangeui">View the Project on GitHub <small>brew20k/orangeui</small></a></p>
+        <ul>
+          <li><a href="https://github.com/brew20k/orangeui/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/brew20k/orangeui/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/brew20k/orangeui">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>OrangeUI Wiki</h1>
+
+<p>OrangeUI is a javascript framework for building dynamic, interactive web applications in the browser.</p>
+
+<h2>Introduction</h2>
+
+<p>The OrangeUI framework is meant as a tool to rapidly develop web based applications, giving the developer a pattern for organizing individual views and their interaction. It provides a base set of modules handling HTML5 features in its Commons package, as well as allows the extending of current view classes to create more complex UI controls.</p>
+
+<h1></h1>
+
+<h2>Commons</h2>
+
+<p>The Commons Library is a base set of tools to help improve the structure of your application. Included are a set of HTML5 feature wrappers (localStorage, offline mode, geolocation) as well as a class-based module pattern similar to what is included with YUI.</p>
+
+<h3>Modules</h3>
+
+<p>The simplest way to access Commons is with the <code>Orange.use()</code> method, which takes in as its arguments, a list of module dependencies and the function wrapping your code to execute. The function is passed the global object O, the base object for all framework and application code.</p>
+
+<pre><code>Orange.use('module_one', 'module_two', function(O) {
+
+    // my code goes here
+
+});
+</code></pre>
+
+<p>In most cases, application code should be defined within modules, which can be namespaced based on what you are building. Modules provide a way to logically separate code as well as load only what parts you need for  a given application. To define a module:</p>
+
+<pre><code>Orange.add('module_name', function(O) {
+
+    O.namespace('MyNamespace');
+
+}, ['module_one', 'module_two'], '0.1');
+</code></pre>
+
+<p>The <code>add()</code> method takes in a module name, function wrapping the code to execute, an array of module dependencies, and an optional version number.</p>
+
+<p>When defining a namespace at <code>O.namespace('MyNamespace')</code>, the object O.MyNamespace will be made available to you for storing your application code.</p>
+
+<h3>Classes</h3>
+
+<p>The Commons library is setup for you to define Javascript classes. <code>O.define()</code> and <code>O.extend()</code> can be used to create new classes and subclass existing classes. Each base class definition expects an initialize() method. For example: </p>
+
+<pre><code>Orange.add('my_module', function(O) {
+
+    O.namespace('MyNamespace');
+
+    // define a new class
+    O.MyNamespace.MyClass = O.define({
+
+        initialize: function() {
+
+            // initialize here
+
+        },
+
+        setTitle: function(title) {
+
+        }
+
+
+    });
+
+    // extend a class
+    O.MyNamespace.MySubClass = O.extend(T.MyNamespace.MyClass, {
+
+        // adds a class to the base class
+        setName: function(name) {
+
+        },
+
+        setTitle: function(title) {
+
+            // call the superclass
+            this._super(title);
+
+        }
+
+    });
+
+}, ['module_one'], '0.1');
+</code></pre>
+
+<p>Calling the <code>this.super()</code> method inside a given class will call the override method from the superclasss.</p>
+
+<h3>HTML5</h3>
+
+<p>The Commons Library provides a base set of methods used to wrap native HTML5 functionality such as localStorage, offline mode, and geolocation.</p>
+
+<h3>Local Storage</h3>
+
+<p>All local storage can be accessed through the <strong>O.Storage</strong> manager on the global object. This object supports <code>get()</code>, <code>set()</code>, <code>remove()</code>, <code>flush()</code>, and <code>flushExpired()</code>.</p>
+
+<h4>.get( key, defaultValue )</h4>
+
+<p><em>Returns the value for a key from localStorage</em></p>
+
+<p><strong>key</strong> a key to lookup from the local storage object<br><strong>defaultValue</strong> the default value to return when the key is not found  </p>
+
+<hr><h4>.set( key, value, ttl )</h4>
+
+<p><em>Sets an object value to localStorage for a given key</em></p>
+
+<p><strong>key</strong> a key store the local storage object to<br><strong>value</strong> the value to store for the given key<br><strong>ttl</strong> <em>optional</em> how long before the object should be auto flushed in milliseconds</p>
+
+<hr><h4>.remove( key )</h4>
+
+<p><em>Removes an object from localStorage for a given key</em></p>
+
+<p><strong>key</strong> a key to remove from localStorage</p>
+
+<hr><h4>.flush( force )</h4>
+
+<p><em>Flushes all object from the localStorage object. Objects will not be flushed in offlineMode unless force is set to <code>true</code>.</em></p>
+
+<p><strong>force</strong>  whether to force clearing in offline mode </p>
+
+<hr><h4>.flushExpired( force )</h4>
+
+<p><em>Flushes all expired objects from the localStorage object. Objects will not be flushed in offlineMode unless force is set to <code>true</code>.</em></p>
+
+<p><strong>force</strong>  whether to force clearing in offline mode </p>
+
+<hr><h4>Examples</h4>
+
+<p>Set an object to localStorage</p>
+
+<pre><code>var user = { name: 'Kevin' };
+O.Storage.set('user', user, 60*1000);
+</code></pre>
+
+<p>Get an object from localStorage</p>
+
+<pre><code>var user = O.Storage.get('user');
+</code></pre>
+
+<p>Remove an object from localStorage</p>
+
+<pre><code>O.Storage.remove('user');
+</code></pre>
+
+<p>Clear all objects from localStorage</p>
+
+<pre><code>O.Storage.flush();
+</code></pre>
+
+<p>Clear all expired objects from localStorage, even in offlineMode</p>
+
+<pre><code>O.Storage.flushExpired(true);
+</code></pre>
+
+<hr><h3>Offline Mode</h3>
+
+<p>Commons provides built in support for HTML5's offline mode caching and online/offline javascript events. In conjunction with a <strong>cache.manifest</strong> file for your web application resources, it is possible to create a fully functional offline web application in the browser.</p>
+
+<p>Offline caching can be accessed through the <strong>O.Cache</strong> manager on the global object. The object supports <code>updateNetworkStatus()</code> method for checking the current connection and fires the custom online/offline event <strong>statusChange</strong> with a code of online -&gt; true or offline -&gt; false. You can also bind events on to the Cache manager to listen for status changes.</p>
+
+<h4>.updateNetworkStatus()</h4>
+
+<p><em>Requests a manual update of the current status of the web application's network connection. Supported browsers will fire <code>statusChange</code> events when the browser goes online/offline, and fall back to polling if the navigator.onLine property is not available.</em></p>
+
+<hr><h4>.on( event, callback )</h4>
+
+<p><em>Binds an event listener to the Cache manager. The Cache manager fires a <code>statusChange</code> event with true or false representing the connection state.</em></p>
+
+<p><strong>name</strong>  the string of the name of the custom event
+<strong>callback</strong>  the specific callback to execute when the even is fired</p>
+
+<hr><h4>.detach( event, callback )</h4>
+
+<p><em>Unbinds an event listener to the Cache manager.</em></p>
+
+<p><strong>name</strong>  (optional) the string of the name of the custom event
+<strong>callback</strong>  (optional) the specific callback to remove</p>
+
+<hr><h4>Examples</h4>
+
+<p>Manually check the connection</p>
+
+<pre><code>O.Cache.updateNetworkStatus();
+</code></pre>
+
+<p>Bind a listener for a network change event</p>
+
+<pre><code>O.Cache.on('statusChange', function(e) {
+
+    if (e.data == true) {
+        alert('Connection Online');
+    } else {
+        alert('Connection Offline');
+    }
+
+});
+</code></pre>
+
+<hr><h3>Location</h3>
+
+<p>Commons provides a wrapper for fetching the current location from the user's browser. This can be accessed through the <strong>O.Location</strong> manager on the global object. The object supports the <code>getLocation()</code> method, which accepts a success and failure callback. The location is fetched asynchronously.</p>
+
+<h4>.getLocation( success, failure )</h4>
+
+<p><em>Submits an asynchronous request for the location of the user's browser. The success callback will receive the coordinates object returned as its sole argument.</em></p>
+
+<p><strong>success</strong>  callback when the location is found
+<strong>failure</strong>  callback when the location is not found</p>
+
+<hr><h4>Examples</h4>
+
+<p>Check the location of the browser</p>
+
+<pre><code>O.Location.getLocation(function(coords) {
+
+    // success
+    alert(coords);
+
+}, function() {
+
+    // failure
+    alert('Location error');
+
+});
+</code></pre>
+
+<hr><h2>MVC</h2>
+
+<p>The MVC Library provides a Model-View-Controller structure that sits on top of Commons. Included are tools allowing for structuring of UI views, reusable controls, dynamic templating with <strong>JSON Template</strong>, as well as data request persistence using localStorage. This library is controlled by the <strong>Application</strong> class which organizes and manages your underlying view controllers.</p>
+
+<h3>Application</h3>
+
+<p>The <strong>Application</strong> class is wrapper class that holds the structure and configuration of your application. All underyling classes, such as models and controllers, contain an accessible reference to the instance of the application running. To create an application, a set of configuration parameters must be registered with the application manager using <code>App.register()</code>. Launching the application is as simple as calling <code>App.init()</code>. The following are stored on the application manager <strong>O.App</strong> on the global object.</p>
+
+<h4>.register( name, config )</h4>
+
+<p><em>Flushes all object from the localStorage object. Objects will not be flushed in offlineMode unless force is set to <code>true</code>.</em></p>
+
+<p><strong>name</strong>  the name of the application to register<br><strong>config</strong>  stores configuration parameters for the application  </p>
+
+<p><em>required</em> - an array of modules required before loading<br><em>location</em> - whether to enable location services, default false<br><em>poll</em> - whether to poll for connection changes, default false<br><em>baseUrl</em> - the baseUrl to serve all content files from<br><em>onLoad</em> - a callback to run when the application is first launched  </p>
+
+<hr><h4>.init( name )</h4>
+
+<p><em>Launches an instance of the application by a given name.</em></p>
+
+<p><strong>name</strong>  the name of the application to launch</p>
+
+<hr><h3>Controllers</h3>
+
+<p>Controllers here refer specifically to ViewControllers (those managing the activity of views). Any controllers managing business logic should ideally be server-side or at least separated from any display logic. </p>
+
+<p>The purpose of a View Controller is to manage all interaction and changes within a View. This includes binding events to specific controls, listening for events from user interaction, and reading data in and out of the DOM. View controllers are structured in a hierarchy, where each View Controller maintains references to its parent and its associated children. The base View Controller class exists on the global object <code>O.ViewController</code>. All custom views inherit from the base ViewController class. </p>
+
+<h4>Registering View Controllers</h4>
+
+<p>Views Controllers are registered differently than standard classes, using the <code>define()</code> and <code>extend()</code> methods on the View Manager located at <code>O.View</code>. When defining a new view, the view must override the <code>type</code> property, a unique name for the view class. This names will be used later to instaniate these views directly from markup.</p>
+
+<h4>.define( def )</h4>
+
+<p><em>Creates a new class from the base class ViewController</em></p>
+
+<p><strong>def</strong>  the class definition object</p>
+
+<hr><h4>.extend( base, def )</h4>
+
+<p><em>Creates a new class from a given base view class</em></p>
+
+<p><strong>base</strong>  the base class to inherit from
+<strong>def</strong>  the definition of the new class</p>
+
+<hr><h4>Examples</h4>
+
+<p>Define a new view</p>
+
+<pre><code>O.MyNewView = O.View.define({
+
+    type: 'my-new-view'
+
+});
+</code></pre>
+
+<p>Extend an existing view</p>
+
+<pre><code>O.MyNewerView = O.View.extend(O.MyNewView, {
+
+    type: 'my-newer-view'
+
+});
+</code></pre>
+
+<h4>View Controller Class</h4>
+
+<p>The base <strong>ViewController</strong> class provides a base set of functions and attributes to manage event handling and reference management. All custom views controllers can access or override these methods to provide new functionality. All custom view controller setup/teardown logic should be placed in the <code>onLoad()</code> and <code>onUnload()</code> methods.</p>
+
+<h4>.type <em>[string]</em>
+</h4>
+
+<p><em>A string of the type of a given view controller</em></p>
+
+<hr><h4>.name <em>[string]</em>
+</h4>
+
+<p><em>A string of the name of the specific instantiated instance of the view controller</em></p>
+
+<hr><h4>.parent <em>[ViewController]</em>
+</h4>
+
+<p><em>A reference to the parent view controller of the given instance</em></p>
+
+<hr><h4>.views <em>[associative array]</em>
+</h4>
+
+<p><em>An associative array holding all child views keyed by name</em></p>
+
+<hr><h4>.elements <em>[associative array]</em>
+</h4>
+
+<p><em>An associative array holding all child elements keyed by name</em></p>
+
+<hr><h4>.forms <em>[associative array]</em>
+</h4>
+
+<p><em>An associative array holding all child forms keyed by name</em></p>
+
+<hr><h4>.getView( name )</h4>
+
+<p><em>Gets a reference to a child view controller by name</em></p>
+
+<p><strong>name</strong>  the string of the name of the view instance</p>
+
+<hr><h4>.getElement( name )</h4>
+
+<p><em>Gets a reference to a child element by name</em></p>
+
+<p><strong>name</strong>  the string of the name of the element instance</p>
+
+<hr><h4>.getForm( name )</h4>
+
+<p><em>Gets a reference to a child form by name</em></p>
+
+<p><strong>name</strong>  the string of the name of the form instance</p>
+
+<hr><h4>Event Handling</h4>
+
+<p>All interaction between View Controllers should be handled by custom events. The ViewController class provides event binding methods such that a view and fire and be bound to events. All events will bubble up from where the are originally fired until they reach the top of the view hierarchy. Any callback can call <code>e.stopPropagation()</code> inside a callback to prevent the event from bubbling further.</p>
+
+<h4>.on( event, callback )</h4>
+
+<p><em>Gets a reference to a child view controller by name</em></p>
+
+<p><strong>name</strong>  the string of the name of the custom event
+<strong>callback</strong>  the specific callback to execute when the even is fired</p>
+
+<hr><h4>.detach( event, callback )</h4>
+
+<p><em>Detaches events from a given view controller</em></p>
+
+<p><strong>name</strong>  (optional) the string of the name of the custom event
+<strong>callback</strong>  (optional) the specific callback to remove</p>
+
+<hr><h4>.fire( name, data )</h4>
+
+<p><em>Fires a custom event with an optional data payload</em></p>
+
+<p><strong>name</strong>  the string of the name of the custom event to fire
+<strong>data</strong>  (optional) the data payload callbacks listening for the event can access</p>
+
+<hr><h3>Views</h3>
+
+<hr><h3>Models</h3>
+
+<hr><h3>Elements</h3>
+
+<hr><h3>Forms</h3>
+
+<hr><h2>iOS Module</h2>
+
+<p>The IOS Module adds in custom view controllers that simulative native iOS controls. Examples include the iOS UIView, UINavigationController, UIScrollView, UITableView, UIModalView, etc. These controls inherit from the base ViewController class and thus support all the functionality of their parent. All default iOS styles are included via the <code>iOS.css</code> stylesheet.</p>
+
+<h3>UIView</h3>
+
+<hr><h3>UINavigationView</h3>
+
+<hr><h3>UITableView</h3>
+
+<hr><h3>UIModalView</h3>
+
+<hr><h3>UIScrollView</h3>
+
+<hr><h3>UIFlipView</h3>
+
+<hr><p>The IOS Module also provides native looking elements, such as navigation bars, buttons, etc.</p>
+
+<h3>UINavigationBar</h3>
+
+<hr><h3>UIBarButtonItem</h3>
+
+<hr><h3>UISegmentedControl</h3>
+
+<hr><h3>UIToolbar</h3>
+
+<hr><h3>UISearchBar</h3>
+
+<hr>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/brew20k">brew20k</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31258532-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
