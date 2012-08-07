@@ -1,0 +1,657 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Orangeui by brew20k</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Orangeui</h1>
+        <p>OrangeUI Web Framework 0.1</p>
+
+        <p class="view"><a href="https://github.com/brew20k/orangeui">View the Project on GitHub <small>brew20k/orangeui</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/brew20k/orangeui/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/brew20k/orangeui/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/brew20k/orangeui">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Commons</h1>
+
+<p>The Commons module is a base set of tools to help improve the structure of your application. It provides you with:</p>
+
+<ul>
+<li>Object-oriented javascript objects</li>
+<li>Event mixin for objects</li>
+<li>HTML5 wrapper functions</li>
+<li>Module dependency management</li>
+</ul><h2>Documentation</h2>
+
+<h3>Class</h3>
+
+<ul>
+<li><a href="#class-extend">extend()</a></li>
+<li><a href="#class-include">include()</a></li>
+<li><a href="#class-proxy">proxy()</a></li>
+</ul><h3>Events</h3>
+
+<ul>
+<li><a href="#events-on">on()</a></li>
+<li><a href="#events-once">once()</a></li>
+<li><a href="#events-fire">fire()</a></li>
+<li><a href="#events-detach">detach()</a></li>
+</ul><h3>EventHandle</h3>
+
+<ul>
+<li><a href="#event-handle-detach">detach()</a></li>
+</ul><h3>EventTarget</h3>
+
+<ul>
+<li><a href="#event-target-current-target">currentTarget</a></li>
+<li><a href="#event-target-target">target</a></li>
+<li><a href="#event-target-stop-propagation">stopPropagation()</a></li>
+</ul><h3>Modules</h3>
+
+<ul>
+<li><a href="#modules-add">add()</a></li>
+<li><a href="#modules-use">use()</a></li>
+<li><a href="#modules-include">include()</a></li>
+<li><a href="#modules-exports">exports</a></li>
+</ul><h3>Cache</h3>
+
+<ul>
+<li><a href="#cache-init">init()</a></li>
+<li><a href="#cache-update-network-status">updateNetworkStatus()</a></li>
+<li><a href="#cache-is-active">isActive()</a></li>
+</ul><p>*<em>includes the Events mixin</em></p>
+
+<h3>Storage</h3>
+
+<ul>
+<li><a href="#storage-get">get()</a></li>
+<li><a href="#storage-set">set()</a></li>
+<li><a href="#storage-remove">remove()</a></li>
+<li><a href="#storage-flush">flush()</a></li>
+<li><a href="#storage-flush-expired">flushExpired()</a></li>
+<li><a href="#storage-is-supported">isSupported()</a></li>
+</ul><h3>Location</h3>
+
+<ul>
+<li><a href="#location-get-location">getLocation()</a></li>
+</ul><h2>Class</h2>
+
+<p>OrangeUI provides basic OOP tools via the <strong>Class</strong> object, which can be used to create and extend classes, include mixins, and proxy functions.</p>
+
+<p><a name="class-extend"></a></p>
+
+<h3>extend(object)</h3>
+
+<p>Class method <code>extend()</code> can be used to create new classes and subclass existing classes. Each base class definition expects an initialize() method. Calling <code>this._super()</code> in an instance method will access and execute the superclass' method.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>object - the javascript object representing the class instance methods. The object must implement the method initialize() as its constructor if it is not inheriting from another class.</li>
+</ul><p><strong>Example</strong></p>
+
+<div class="highlight"><pre><span class="c1">// creates a new class 'MyClass'</span>
+<span class="kd">var</span> <span class="nx">MyClass</span> <span class="o">=</span> <span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">getAge</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">25</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+
+<span class="c1">// creates a subclass of 'MyClass'</span>
+<span class="kd">var</span> <span class="nx">MySubClass</span> <span class="o">=</span> <span class="nx">MyClass</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+    <span class="nx">getMyAge</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'My age is '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAge</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="c1">// accessing the superclass</span>
+<span class="kd">var</span> <span class="nx">MySubClass</span> <span class="o">=</span> <span class="nx">MyClass</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+    <span class="nx">getAge</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// returns 30</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+
+<hr><p><a name="class-include"></a></p>
+
+<h3>include(mixin)</h3>
+
+<p>Binds a mixin of functions to an existing class so that all mixin methods are available to instances of that class.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>mixin - the object containing the functions to add to the given class</li>
+</ul><p><strong>Example</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyClass</span> <span class="o">=</span> <span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">MyMixin</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">myMethodOne</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'one'</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">myMethodTwo</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'two'</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">MyClass</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="nx">MyMixin</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+<span class="nx">instance</span><span class="p">.</span><span class="nx">myMethodTwo</span><span class="p">();</span> <span class="c1">// will return 'two'</span>
+</pre></div>
+
+<hr><p><a name="class-proxy"></a></p>
+
+<h3>proxy(function, context)</h3>
+
+<p>Returns a function bound to a given context object for execution at a later time. This provides the same functionality as jQuery's <code>$.proxy()</code> function.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>function - the function to bind the context to</li>
+<li>context - the object to use as the context</li>
+</ul><p><strong>Example</strong></p>
+
+<div class="highlight"><pre><span class="c1">// proxies a function with a context object</span>
+<span class="nx">Class</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// prints 'my-context'</span>
+<span class="p">},</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'my-context'</span> <span class="p">});</span>
+</pre></div>
+
+<h2>Events</h2>
+
+<p>OrangeUI provides the <em>Event</em> mixin that can be used to bind events to objects. Objects including this mixin have access to the <code>once()</code>, <code>on()</code>, <code>fire()</code>, and <code>detach()</code> methods to handle all event listening on an object. An optional parent can be passed to the mixin to allow for event bubbling up a heirarchy you define.</p>
+
+<p>The <code>on()</code> function will return an event handle that can be used to detach the event at a later time. Callbacks receive an <code>e</code> argument and a <code>data</code> argument when executed, the <code>e</code> argument including the target, currentTarget, and access to call <code>e.stopPropagation</code> to prevent event bubbling. The <code>data</code> argument is set to the optional second argument passed to the <code>fire()</code> method to trigger an event.</p>
+
+<p><a name="events-on"></a></p>
+
+<h3>on(event, callback, context)</h3>
+
+<p>Subscribes a callback to a given event and returns an <strong>EventHandle</strong> instance for later detaching.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>event -   a string of the event to listen for </li>
+<li>callback - a function to execute when the event is fired </li>
+<li>context - an optional context to proxy the callback with </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="c1">// bind an 'load' event</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded!'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="err">```</span><span class="nx">js</span>
+<span class="c1">// or with an optional context</span>
+
+<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">msg</span><span class="o">:</span> <span class="s2">"Appeared!"</span>
+<span class="p">};</span>
+
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span> <span class="c1">// prints 'Appeared!'</span>
+<span class="p">},</span> <span class="nx">context</span><span class="p">);</span>
+</pre></div>
+
+<hr><p><a name="events-once"></a></p>
+
+<h3>once(event, callback, context)</h3>
+
+<p>Subscribes a callback to an event just once. Once the event is fired, all callbacks defined using <code>once()</code> will be detached.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>event - a string of the event to listen for </li>
+<li>callback - a function to execute when the event is fired </li>
+<li>context - an optional context to proxy the callback with </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="c1">// bind once event</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Firing'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">);</span> <span class="c1">// prints 'Firing'</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">);</span> <span class="c1">// prints nothing</span>
+</pre></div>
+
+<hr><p><a name="events-fire"></a></p>
+
+<h3>fire(event, [data])</h3>
+
+<p>Fires an event of a given name and passes an optional payload to all subscribing callbacks.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>event - a string of the event to fire </li>
+<li>data - a payload to pass to all registered callbacks </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="c1">// bind once event</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded!'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">);</span> <span class="c1">// prints 'Loaded!'</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="c1">// bind once event</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// prints { msg: 'hello' }</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'appear'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">msg</span><span class="o">:</span> <span class="s1">'hello'</span><span class="p">});</span>
+</pre></div>
+
+<hr><p><a name="events-detach"></a></p>
+
+<h3>detach([event], [callback])</h3>
+
+<p>Detaches listeners from a given object. It will detach all listeners for an event when a callback is not set, and all listeners on that object when no arguments are passed.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>event -   the event string to unbind listeners for </li>
+<li>callback - the callback to unbind from an given event </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="c1">// unbinds a specific listener</span>
+<span class="kd">var</span> <span class="nx">onLoad</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded!'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// bind the event</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
+
+<span class="c1">// detach that event</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">detach</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="c1">// unbinds all listeners for 'load'</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">detach</span><span class="p">(</span><span class="s1">'load'</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="c1">// unbinds all listeners</span>
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+</pre></div>
+
+<h2>EventHandle</h2>
+
+<p><a name="event-handle-detach"></a></p>
+
+<h3>detach()</h3>
+
+<p>Detaches the listener bound to the given EventHandle</p>
+
+<p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">handle</span> <span class="o">=</span> <span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded!'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">handle</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span> <span class="c1">// detaches the event</span>
+</pre></div>
+
+<h2>EventTarget</h2>
+
+<p>The EventTarget is passed as the <code>e</code> argument to all callback functions when an event is fired. If a class has defined its <code>_parent</code> reference, the EventTarget will attempt to bubble events up the hierachy until it either reaches a parent of <code>null</code> or <code>stopPropagation()</code> is called.</p>
+
+<p><a name="event-target-current-target"></a></p>
+
+<h3>currentTarget</h3>
+
+<p>Returns the current object the event is firing on.</p>
+
+<hr><p><a name="event-target-target"></a></p>
+
+<h3>target</h3>
+
+<p>Returns the object the event was originally triggered on.</p>
+
+<hr><p><a name="event-target-stop-propagation"></a></p>
+
+<h3>stopPropagation()</h3>
+
+<p>Stops the bubbling of an event up the parent hierarchy when called inside a callback.</p>
+
+<p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">myEventedClassParent</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded Parent!'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">_parent</span> <span class="o">=</span> <span class="nx">myEventedClassParent</span><span class="p">;</span>
+
+<span class="nx">myEventedClass</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded!'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEventedClassChild</span><span class="p">.</span><span class="nx">_parent</span> <span class="o">=</span> <span class="nx">myEventedClass</span><span class="p">;</span>
+
+<span class="nx">myEventedClassChild</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loaded Child!'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEventedClassChild</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'load'</span><span class="p">);</span>
+
+<span class="c1">// prints 'Loaded Child!'</span>
+<span class="c1">// prints 'Loaded!'</span>
+<span class="c1">// doesn't print 'Loaded Parent!'</span>
+</pre></div>
+
+<h2>Modules</h2>
+
+<p>Modules give an easy way to manage dependencies and organize logically separate code components. Since client-side code is executed as it is included in your HTML files, modules are registered via the <code>add()</code> function on the global object. This method specifics the code to add as well as the modules it is dependent on, and the version of the module.</p>
+
+<p><a name="modules-add"></a></p>
+
+<h3>add(module, fn, dep, version)</h3>
+
+<p>Adds a module with a given name and associates it with a given number of dependencies and versions. The <code>add()</code> method is available globally on the <code>Orange</code> object.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>module - the module string name </li>
+<li>fn - the function containing the modules code </li>
+<li>dep - an array of module dependency name strings </li>
+<li>version - the string version number of the module </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Orange</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my-module'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// my code here</span>
+
+<span class="p">},</span> <span class="p">[</span><span class="s1">'my-other-module'</span><span class="p">],</span> <span class="s1">'0.1'</span><span class="p">);</span>
+</pre></div>
+
+<hr><p><a name="modules-use"></a></p>
+
+<h3>use(dependencies…, fn)</h3>
+
+<p>On occasion, it might be necessary to run adhoc code without necessarily creating a module. This can be done using the <code>use()</code> method, which loads required dependencies for the code. The code within the function will be run immediately when <code>use()</code> is executed. The <code>use()</code> method is available globally on the <code>Orange</code> object.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>dependencies - (multiple) the string names of the modules </li>
+<li>fn - a function containing the adhoc code </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Orange</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'my-module-one'</span><span class="p">,</span> <span class="s1">'my-module-two'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// code goes here</span>
+
+<span class="p">});</span>
+</pre></div>
+
+<hr><p><a name="modules-include"></a></p>
+
+<h3>include(module)</h3>
+
+<p>To load required components, OrangeUI uses a convention similar to that seen in NodeJS. Requires and loads an external module and returns the object associated with that module's <code>exports</code> object. The <code>include()</code> method is available in the global scope.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>module - the name of the module to import</li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="c1">// returns the exports object of module myClass</span>
+<span class="kd">var</span> <span class="nx">myClass</span> <span class="o">=</span> <span class="nx">include</span><span class="p">(</span><span class="s1">'myClass'</span><span class="p">);</span>
+</pre></div>
+
+<hr><p><a name="modules-exports"></a></p>
+
+<h3>exports</h3>
+
+<p>To export private code components, the exports object is passed to the function. It can either be set in its entirety, or have attributes added to it.</p>
+
+<p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Orange</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my-module'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">myClass</span> <span class="o">=</span> <span class="nx">include</span><span class="p">(</span><span class="s1">'myClass'</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">newClass</span> <span class="o">=</span> <span class="nx">myClass</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">getName</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">'newClass'</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">newClass</span> <span class="o">=</span> <span class="nx">newClass</span><span class="p">;</span> <span class="c1">// the class is an attribute</span>
+
+    <span class="nx">exports</span> <span class="o">=</span> <span class="nx">newClass</span><span class="p">;</span> <span class="c1">// the class is the entire object</span>
+
+<span class="p">},</span> <span class="p">[</span><span class="s1">'my-other-module'</span><span class="p">],</span> <span class="s1">'0.1'</span><span class="p">);</span>
+</pre></div>
+
+<h2>Cache - HTML5 Offline Mode</h2>
+
+<p>Commons provides built in support for HTML5's offline mode caching and online/offline javascript events. In conjunction with a <strong>cache.manifest</strong> file for your web application resources, it is possible to create a fully functional offline web application in the browser.</p>
+
+<p>Offline caching can be accessed through the <strong>Cache</strong> object, which supports <code>updateNetworkStatus()</code> method for checking the current connection and fires the custom online/offline event <strong>statusChange</strong> with a boolean payload for if the connection is online. You can also bind events on to the Cache object to listen for status changes.</p>
+
+<p><a name="cache-init"></a></p>
+
+<h3>init()</h3>
+
+<p>Initializes the Cache and starts listening for online or offline events. </p>
+
+<p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Cache</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+</pre></div>
+
+<p><a name="cache-update-network-status"></a></p>
+
+<h3>updateNetworkStatus()</h3>
+
+<p>Requests a manual update of the current status of the web application's network connection. Supported browsers will fire <code>statusChange</code> events when the browser goes online/offline, and fall back to polling if the navigator.onLine property is not available.</p>
+
+<p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Cache</span><span class="p">.</span><span class="nx">updateNetworkStatus</span><span class="p">();</span> <span class="c1">// will fire 'statusChange' event</span>
+</pre></div>
+
+<p><a name="cache-is-active"></a></p>
+
+<h3>isActive()</h3>
+
+<p>Returns a boolean value stating whether the Cache has been initialized.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">active</span> <span class="o">=</span> <span class="nx">Cache</span><span class="p">.</span><span class="nx">isActive</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">active</span><span class="p">);</span> <span class="c1">// prints true or false</span>
+</pre></div>
+
+<h2>Storage - HTML5 Local Storage</h2>
+
+<p>The <strong>Commons</strong> module provides a wrapper for the HTML5 localStorage feature, adding support for the serializing of Javascript objects and setting autoexpirable keys. The <strong>Storage</strong> object supports <code>get()</code>, <code>set()</code>, <code>remove()</code>, <code>flush()</code>, and <code>flushExpired()</code>.</p>
+
+<p><a name="storage-get"></a></p>
+
+<h3>get(key, [defaultValue])</h3>
+
+<p>Returns the value for a key from localStorage.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>key - a key to lookup from the local storage object<br>
+</li>
+<li>defaultValue - the default value to return when the key is not found<br>
+</li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">myKey</span> <span class="o">=</span> <span class="nx">Storage</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">);</span>
+</pre></div>
+
+<hr><p><a name="storage-set"></a></p>
+
+<h3>set(key, value, [ttl])</h3>
+
+<p>Sets an object value to localStorage for a given key.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>key - a key store the local storage object to<br>
+</li>
+<li>value - the value to store for the given key<br>
+</li>
+<li>ttl - optional how long before the object should be auto flushed in milliseconds</li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="c1">// store a string</span>
+<span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">,</span> <span class="s1">'myValue'</span><span class="p">);</span>
+
+<span class="c1">// or an object</span>
+<span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">'myValue'</span> <span class="p">});</span>
+</pre></div>
+
+<hr><p><a name="storage-remove"></a></p>
+
+<h3>remove(key)</h3>
+
+<p>Removes an object from localStorage for a given key.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>key - a key to remove from localStorage</li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Storage</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">);</span>
+</pre></div>
+
+<hr><p><a name="storage-flush"></a></p>
+
+<h3>flush(force)</h3>
+
+<p>Flushes all object from the localStorage object. Objects will not be flushed in offlineMode unless force is set to <code>true</code>.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>force - whether to force clearing in offline mode</li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Storage</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+</pre></div>
+
+<hr><p><a name="storage-flush-expired"></a></p>
+
+<h3>flushExpired(force)</h3>
+
+<p>Flushes all expired objects from the localStorage object. Objects will not be flushed in offlineMode unless force is set to <code>true</code>.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>force -  whether to force clearing in offline mode </li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Storage</span><span class="p">.</span><span class="nx">flushExpired</span><span class="p">();</span>
+</pre></div>
+
+<p><a name="storage-is-supported"></a></p>
+
+<h3>isSupported()</h3>
+
+<p>Returns a boolean value checking if the localStorage cache is supported.</p>
+
+<p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">support</span> <span class="o">=</span> <span class="nx">Storage</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">support</span><span class="p">);</span> <span class="c1">// prints true or false</span>
+</pre></div>
+
+<h2>Location - HTML5 Geolocation</h2>
+
+<p>Commons provides a wrapper for <strong>HTML5 Geolocation</strong> fetching of the current location from the user's browser. The <strong>Location</strong> object supports the <code>getLocation()</code> method, which accepts a success and failure callback. The location is fetched asynchronously.</p>
+
+<p><a name="location-get-location"></a></p>
+
+<h3>getLocation(success, failure)</h3>
+
+<p>Submits an asynchronous request for the location of the user's browser. The success callback will receive the coordinates object returned as its argument.</p>
+
+<p><strong>Arguments</strong></p>
+
+<ul>
+<li>success(coords) - the callback that the location coordinates will be passed to.</li>
+<li>failure(err) - the callback that will be called if the coordinates cannot be retreived</li>
+</ul><p><strong>Examples</strong></p>
+
+<div class="highlight"><pre><span class="nx">Location</span><span class="p">.</span><span class="nx">getLocation</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">coords</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">coords</span><span class="p">);</span> <span class="c1">// success</span>
+
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'Location error'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span> <span class="c1">// failure</span>
+
+<span class="p">});</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/brew20k">brew20k</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31258532-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
