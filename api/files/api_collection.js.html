@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>api&#x2F;collection.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Application.html">Application</a></li>
+            
+                <li><a href="..&#x2F;classes/Binding.html">Binding</a></li>
+            
+                <li><a href="..&#x2F;classes/Browser.html">Browser</a></li>
+            
+                <li><a href="..&#x2F;classes/Cache.html">Cache</a></li>
+            
+                <li><a href="..&#x2F;classes/Class.html">Class</a></li>
+            
+                <li><a href="..&#x2F;classes/Collection.html">Collection</a></li>
+            
+                <li><a href="..&#x2F;classes/Deferred.html">Deferred</a></li>
+            
+                <li><a href="..&#x2F;classes/EventHandle.html">EventHandle</a></li>
+            
+                <li><a href="..&#x2F;classes/Events.html">Events</a></li>
+            
+                <li><a href="..&#x2F;classes/EventTarget.html">EventTarget</a></li>
+            
+                <li><a href="..&#x2F;classes/Loader.html">Loader</a></li>
+            
+                <li><a href="..&#x2F;classes/Location.html">Location</a></li>
+            
+                <li><a href="..&#x2F;classes/Log.html">Log</a></li>
+            
+                <li><a href="..&#x2F;classes/Model.html">Model</a></li>
+            
+                <li><a href="..&#x2F;classes/Module.html">Module</a></li>
+            
+                <li><a href="..&#x2F;classes/Promise.html">Promise</a></li>
+            
+                <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
+            
+                <li><a href="..&#x2F;classes/Service.html">Service</a></li>
+            
+                <li><a href="..&#x2F;classes/Storage.html">Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/View.html">View</a></li>
+            
+                <li><a href="..&#x2F;classes/ViewController.html">ViewController</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/Core.html">Core</a></li>
+            
+                <li><a href="..&#x2F;modules/Data.html">Data</a></li>
+            
+                <li><a href="..&#x2F;modules/HTML5.html">HTML5</a></li>
+            
+                <li><a href="..&#x2F;modules/UI.html">UI</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: api&#x2F;collection.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+&#x2F;&#x2F; Collection Class
+&#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+
+&#x2F;**
+ * @module Data
+ *&#x2F;
+(function(Orange) {
+
+  var Collection;
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Dependencies
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  var Events           = Orange.Events;
+  var Model            = Orange.Model;
+
+
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Events
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  &#x2F;**
+   * Fired when an item is added to a collection.
+   * @event add
+   * @param {*} item  The item added to the collection.
+   * @param {*} index  The index of the item to append after. Defaults to the end.
+   *&#x2F;
+  var EVENT_ADD = &#x27;add&#x27;;
+  
+  &#x2F;**
+   * Fired when an item is removed from the collection.
+   * @event remove
+   * @param {int} index  The index or id of the item removed from the collection.
+   *&#x2F;
+  var EVENT_REMOVE = &#x27;remove&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in the sorting of the collection occurs.
+   * @param {bool} asc  Whether the sort is ascending.
+   * @event sort
+   *&#x2F;
+  var EVENT_SORT = &#x27;sort&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in the collection occurs.
+   * @event update
+   *&#x2F;
+  var EVENT_UPDATE = &#x27;update&#x27;;
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Class Definition
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+
+  Collection = Class.extend({
+    
+    &#x2F;**
+     * @class Collection
+     * @uses Events
+     * @constructor
+     *&#x2F;
+    initialize: function() {
+      
+      &#x2F;**
+       * Stores an array of the data maintained within the collection.
+       * @property _data
+       * @type {array}
+       * @default []
+       * @private
+       *&#x2F;
+      this._data = [];
+      
+      &#x2F;**
+       * Stores the original data passed to the collection.
+       * @property _source
+       * @type {array}
+       * @default []
+       * @private
+       *&#x2F;
+      this._source = [];
+      
+      &#x2F;**
+       * Stores whether the collection is sorted ascending.
+       * @property _asc
+       * @type {bool}
+       * @default true
+       * @private
+       *&#x2F;
+      this._asc = true;
+      
+      &#x2F;**
+       * Stores the fields the collection has been sorted on.
+       * @property _sorts
+       * @type {array}
+       * @default []
+       * @private
+       *&#x2F;
+      this._sorts = [];
+      
+      &#x2F;**
+       * Stores the key value filters applied to the collection.
+       * @property _filters
+       * @type {object}
+       * @default {}
+       * @private
+       *&#x2F;
+      this._filters = {};
+      
+      &#x2F;**
+       * Stores the pagination integer for paginating the collection.
+       * @property _paginate
+       * @type {int}
+       * @default 0
+       * @private
+       *&#x2F;
+      this._paginate = 0;
+      
+      &#x2F;**
+       * Stores the current page the collection is on.
+       * @property _page
+       * @type {int}
+       * @default 1
+       * @private
+       *&#x2F;
+      this._page = 1;
+      
+    },
+    
+    &#x2F;**
+     * Gets an item from the collection by either id or index.
+     *
+     * @method get
+     * @param {int|string} index  The id or index to lookup.
+     * @return {*}  The item from the collection.
+     *&#x2F;
+    get: function(index) {
+    
+    },
+    
+    &#x2F;**
+     * Appends an item to the end of the collection.
+     *
+     * @method append
+     * @param {*} item  The item to append to the collection.
+     *&#x2F;
+    append: function(item) {
+    
+    },
+    
+    &#x2F;**
+     * Prepends an item to the beginning of the collection.
+     *
+     * @method prepend
+     * @param {*} item  The item to prepend to the collection.
+     *&#x2F;
+    prepend: function(item) {
+    
+    },
+    
+    &#x2F;**
+     * Inserts an item at specified index in the collection. Zero denotes the
+     * beginning of the collection. Id&#x27;s can also be used, inserting the
+     * item after the item with the given id.
+     *
+     * @method insert
+     * @param {int|string} index  The id or index to insert after.
+     * @param {*} item  The item to insert into the collection.
+     *&#x2F;
+    insert: function(index, item) {
+    
+    },
+    
+    &#x2F;**
+     * Removes an item from the collection by a given index or id.
+     *
+     * @method remove
+     * @param {int|string} index  The index or id to remove from the collection.
+     *&#x2F;
+    remove: function(index) {
+    
+    },
+    
+    &#x2F;**
+     * Clears all the items from the collection. The collection will be restored
+     * to its original initialized state.
+     *
+     * @method clear
+     *&#x2F;
+    clear: function() {
+    
+    },
+    
+    &#x2F;**
+     * Returns the number of objects currently in the collection. This does not take
+     * into account any applied filters.
+     *
+     * @method size
+     * @param {bool} visible  Returns only the count of visible items.
+     * @return {int}  The number of items in the collection.
+     *&#x2F;
+    size: function(visible) {
+    
+    },
+    
+    &#x2F;**
+     * Filters a collection on a given keyword or set of keywords. The filters will
+     * be applied to a specific field, or all fields if none are specified. The filter
+     * can also be applied to the existing already filtered list. By default, the list
+     * will filter from its unfiltered state.
+     *
+     * @method filter
+     * @param {string|array} keyword  The keyword or array of keywords to filter on.
+     * @param {string} [field]  The field to filter on, or none if testing all fields.
+     * @param {bool} [existing]  Whether or not to start the filter from the entire set.
+     *&#x2F;
+    filter: function(keyword, field, existing) {
+    
+    },
+    
+    &#x2F;**
+     * Unfilters the current collection, either removing a specific keyword, or
+     * all filters if none are specified.
+     *
+     * @method unfilter
+     * @param {string} [keyword]  The keyword to remove from filtering.
+     *&#x2F;
+    unfilter: function(keyword) {
+    
+    },
+    
+    &#x2F;**
+     * Sorts the collection based on a given field or set of fields. If a set is passed
+     * the collection will filter on each field in order of precedence.  Sort must
+     * only be called before paginating.
+     *
+     * @method sort
+     * @param {string|array} field  The field or fields to sort the collection by.
+     * @param {bool} direction  The direction to filter, ascending is default.
+     *&#x2F;
+    sort: function(field, direction) {
+    
+    },
+    
+    &#x2F;**
+     * Reverses the direction of the collection. This will be applied regardless if a
+     * specific sort has been applied. Reverse cannot be called while paginated.
+     *
+     * @method reverse
+     *&#x2F;
+    reverse: function() {
+    
+    },
+    
+    &#x2F;**
+     * Paginates the collection to a specific number of items. Filter and sorts should
+     * be applied prior to pagination, for they cannot be changed while paginated.
+     *
+     * @method paginate
+     * @param {int} limit  The number of items per page.
+     * @param {int} [page]  Optionally what page to start on, defaulting to the first.
+     *&#x2F;
+    paginate: function(limit, page) {
+    
+    },
+    
+    &#x2F;**
+     * Removes pagination from the collection returning it to its default state.
+     *
+     * @method unpaginate
+     *&#x2F;
+    unpaginate: function() {
+    
+    },
+    
+    &#x2F;**
+     * Sets the page of the paginated collection, or returns the current page of the
+     * collection.
+     *
+     * @method page
+     * @param {int} [page]  The page to goto in the collection. Optionally the current page.
+     *&#x2F;
+    page: function(page) {
+    
+    },
+    
+    &#x2F;**
+     * Goes to the first page of the paginated collection.
+     *
+     * @method start
+     *&#x2F;
+    start: function() {
+    
+    },
+    
+    &#x2F;**
+     * Goes to the last page of the paginated collection.
+     *
+     * @method end
+     *&#x2F;
+    end: function() {
+    
+    },
+    
+    &#x2F;**
+     * Goes to the next page of the paginated collection.
+     *
+     * @method next
+     *&#x2F;
+    next: function() {
+    
+    },
+    
+    &#x2F;**
+     * Goes to the previous page of the paginated collection.
+     *
+     * @method prev
+     * @param
+     *&#x2F;
+    prev: function() {
+    
+    },
+    
+    &#x2F;**
+     * Returns an array representation of the entire collection.
+     *
+     * @method toArray
+     * @param {bool} visible  If set, will only return filtered items.
+     *&#x2F;
+    toArray: function() {
+    
+    },
+    
+    &#x2F;**
+     * Destroys the collection and removes all references to its underlying data.
+     *
+     * @method destroy
+     *&#x2F;
+    destroy: function() {
+    
+    }
+  
+  }).includes(Events);
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Exports
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  Orange.Collection = Collection;
+    
+  
+}(Orange));
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

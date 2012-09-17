@@ -1,0 +1,4897 @@
+{
+    "project": {},
+    "files": {
+        "api/app.js": {
+            "name": "api/app.js",
+            "modules": {},
+            "classes": {
+                "Application": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/binding.js": {
+            "name": "api/binding.js",
+            "modules": {},
+            "classes": {
+                "Binding": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/cache.js": {
+            "name": "api/cache.js",
+            "modules": {},
+            "classes": {
+                "Cache": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/collection.js": {
+            "name": "api/collection.js",
+            "modules": {},
+            "classes": {
+                "Collection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/controller.js": {
+            "name": "api/controller.js",
+            "modules": {},
+            "classes": {
+                "ViewController": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/location.js": {
+            "name": "api/location.js",
+            "modules": {},
+            "classes": {
+                "Location": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/model.js": {
+            "name": "api/model.js",
+            "modules": {},
+            "classes": {
+                "Model": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/module.js": {
+            "name": "api/module.js",
+            "modules": {
+                "Core": 1
+            },
+            "classes": {
+                "Module": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/orange.js": {
+            "name": "api/orange.js",
+            "modules": {},
+            "classes": {
+                "Class": 1,
+                "EventTarget": 1,
+                "EventHandle": 1,
+                "Events": 1,
+                "Deferred": 1,
+                "Promise": 1,
+                "Loader": 1,
+                "Log": 1,
+                "Browser": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/queue.js": {
+            "name": "api/queue.js",
+            "modules": {},
+            "classes": {
+                "Queue": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/service.js": {
+            "name": "api/service.js",
+            "modules": {
+                "Data": 1
+            },
+            "classes": {
+                "Service": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/storage.js": {
+            "name": "api/storage.js",
+            "modules": {
+                "HTML5": 1
+            },
+            "classes": {
+                "Storage": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "api/view.js": {
+            "name": "api/view.js",
+            "modules": {
+                "UI": 1
+            },
+            "classes": {
+                "View": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "UI": {
+            "name": "UI",
+            "submodules": {},
+            "classes": {
+                "Application": 1,
+                "ViewController": 1,
+                "View": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "api/view.js",
+            "line": 10
+        },
+        "Data": {
+            "name": "Data",
+            "submodules": {},
+            "classes": {
+                "Binding": 1,
+                "Collection": 1,
+                "Model": 1,
+                "Service": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "api/service.js",
+            "line": 138
+        },
+        "HTML5": {
+            "name": "HTML5",
+            "submodules": {},
+            "classes": {
+                "Cache": 1,
+                "Location": 1,
+                "Storage": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "api/storage.js",
+            "line": 39
+        },
+        "Core": {
+            "name": "Core",
+            "submodules": {},
+            "classes": {
+                "Module": 1,
+                "Class": 1,
+                "EventTarget": 1,
+                "EventHandle": 1,
+                "Events": 1,
+                "Deferred": 1,
+                "Promise": 1,
+                "Loader": 1,
+                "Log": 1,
+                "Browser": 1,
+                "Queue": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "api/queue.js",
+            "line": 25
+        }
+    },
+    "classes": {
+        "Application": {
+            "name": "Application",
+            "shortname": "Application",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "api/app.js",
+            "line": 29,
+            "description": "The Application class manages the entire application lifecycle, from setup to authentication\nto accessing services and loading the DOM.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The application is passed your app.json file.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Binding": {
+            "name": "Binding",
+            "shortname": "Binding",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Data",
+            "namespace": "",
+            "file": "api/binding.js",
+            "line": 233,
+            "description": "The Binding class allows for live data binding of objects, arrays, Models, and Collections\nto DOM elements using HTML5's **Microdata** specification.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "target",
+                    "description": "A reference to a DOM element that will be used for binding.",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "Cache": {
+            "name": "Cache",
+            "shortname": "Cache",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "HTML5",
+            "namespace": "",
+            "file": "api/cache.js",
+            "line": 45,
+            "description": "The Cache class wraps HTML5's offlineMode functionality to notify the application\nwhen a change in network connectivity has occurred.",
+            "requires": [
+                "Deferred",
+                "Promise"
+            ],
+            "uses": [
+                "Events"
+            ],
+            "is_constructor": 1
+        },
+        "Collection": {
+            "name": "Collection",
+            "shortname": "Collection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Data",
+            "namespace": "",
+            "file": "api/collection.js",
+            "line": 60,
+            "uses": [
+                "Events"
+            ],
+            "is_constructor": 1
+        },
+        "ViewController": {
+            "name": "ViewController",
+            "shortname": "ViewController",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "api/controller.js",
+            "line": 69,
+            "description": "The ViewController is the primary class of OrangeUI and manages all interaction logic in\nthe application. This includes binding events to DOM elements, passing data to your views\nmanipulating the DOM, managing route hashes, and organizing the view lifecycle.",
+            "extends": "Module",
+            "uses": [
+                "Queue"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "The parent of the view controller if it exists.",
+                    "type": "ViewController"
+                },
+                {
+                    "name": "target",
+                    "description": "Either a jQuery DOM reference or a HTML string.",
+                    "type": "JQuery|string"
+                },
+                {
+                    "name": "app",
+                    "description": "An optional reference to the Application instance.",
+                    "type": "Application",
+                    "optional": true
+                }
+            ]
+        },
+        "Location": {
+            "name": "Location",
+            "shortname": "Location",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "HTML5",
+            "namespace": "",
+            "file": "api/location.js",
+            "line": 88,
+            "description": "Wraps HTML5's navigator.geolocation object for easy retrieval and caching of\ncurrent coordinates.",
+            "requires": [
+                "Deferred"
+            ]
+        },
+        "Model": {
+            "name": "Model",
+            "shortname": "Model",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Data",
+            "namespace": "",
+            "file": "api/model.js",
+            "line": 56,
+            "extends": "Module",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The source data for the model.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Module": {
+            "name": "Module",
+            "shortname": "Module",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/module.js",
+            "line": 26,
+            "description": "The Module class adds class key registration and the Event mixin to\nthe generic class object.",
+            "uses": [
+                "Events"
+            ]
+        },
+        "Class": {
+            "name": "Class",
+            "shortname": "Class",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 82,
+            "description": "A generic class providing oop and inheritance\nvia javascript prototypes.",
+            "is_constructor": 1
+        },
+        "EventTarget": {
+            "name": "EventTarget",
+            "shortname": "EventTarget",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 137,
+            "description": "The e target object passed to all event callbacks.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "the name of the event.",
+                    "type": "String"
+                },
+                {
+                    "name": "currentTarget",
+                    "description": "The current target set to each bubble level.",
+                    "type": "*"
+                },
+                {
+                    "name": "target",
+                    "description": "The target that originally fired the event.",
+                    "type": "*"
+                },
+                {
+                    "name": "data",
+                    "description": "The data payload passed along with the event.",
+                    "type": "*"
+                }
+            ]
+        },
+        "EventHandle": {
+            "name": "EventHandle",
+            "shortname": "EventHandle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 171,
+            "description": "The handle returned at every event binding (not including once)\nthat maintains a reference to detach the event in the future.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The name of the event.",
+                    "type": "String"
+                },
+                {
+                    "name": "call",
+                    "description": "The function bound to the event.",
+                    "type": "Function"
+                },
+                {
+                    "name": "target",
+                    "description": "The target the event is bound to.",
+                    "type": "*"
+                }
+            ]
+        },
+        "Events": {
+            "name": "Events",
+            "shortname": "Events",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Cache",
+                "Collection",
+                "Module",
+                "Log"
+            ],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 204,
+            "description": "A mixin for adding custom event functionality to an object. Events may be\nbound, fired, and detached dynamically directly on objects.",
+            "static": 1,
+            "requires": [
+                "EventTarget"
+            ]
+        },
+        "Deferred": {
+            "name": "Deferred",
+            "shortname": "Deferred",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 296,
+            "description": "Provides deferred objects to more easily handle asynchronous function calls.",
+            "is_constructor": 1
+        },
+        "Promise": {
+            "name": "Promise",
+            "shortname": "Promise",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 506,
+            "description": "Provides promise objects to more easily handle asynchronous function calls.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "A deferred object to listen for",
+                    "type": "Deferred"
+                }
+            ]
+        },
+        "Loader": {
+            "name": "Loader",
+            "shortname": "Loader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 653,
+            "description": "Handles dependency loading for each module."
+        },
+        "Log": {
+            "name": "Log",
+            "shortname": "Log",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 709,
+            "description": "A wrapper around logging. Allows the application to intercept log\nevent messages and display them to the user.",
+            "is_constructor": 1,
+            "uses": [
+                "Events"
+            ]
+        },
+        "Browser": {
+            "name": "Browser",
+            "shortname": "Browser",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/orange.js",
+            "line": 792,
+            "description": "The Browser object stores many commonly checked feature detection results.",
+            "static": 1
+        },
+        "Queue": {
+            "name": "Queue",
+            "shortname": "Queue",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "ViewController"
+            ],
+            "module": "Core",
+            "namespace": "",
+            "file": "api/queue.js",
+            "line": 25,
+            "description": "The Queue makes it simple to easily create chainable methods that\ncan be executed synchronously.",
+            "static": 1,
+            "requires": [
+                "Deferred",
+                "Promise"
+            ]
+        },
+        "Service": {
+            "name": "Service",
+            "shortname": "Service",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Data",
+            "namespace": "",
+            "file": "api/service.js",
+            "line": 138,
+            "description": "The Service class handles all connections to external web services. A collection of endpoints\nfor a specific url path can be organized into method calls here, and their responses\nsanitized and mapped into standard model/collection formats.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The config object for the service.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Storage": {
+            "name": "Storage",
+            "shortname": "Storage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "HTML5",
+            "namespace": "",
+            "file": "api/storage.js",
+            "line": 39,
+            "description": "Wraps HTML5's localStorage feature for easy retrieval of key value pairs from cache. Each\npair is expirable as is the entire local storage cache."
+        },
+        "View": {
+            "name": "View",
+            "shortname": "View",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "api/view.js",
+            "line": 10,
+            "description": "The static view loader class that asynchronously loads view\nfragments and caches them on the client for use.",
+            "static": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "api/binding.js",
+            "line": 28,
+            "description": "Fired when an item is added to a collection.",
+            "itemtype": "event",
+            "name": "add",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The item added to the collection.",
+                    "type": "*"
+                },
+                {
+                    "name": "index",
+                    "description": "The index of the item to append after. Defaults to the end.",
+                    "type": "*"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 36,
+            "description": "Fired when an item is removed from the collection.",
+            "itemtype": "event",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index or id of the item removed from the collection.",
+                    "type": "Int"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 43,
+            "description": "Fired when a change in the sorting of the collection occurs.",
+            "params": [
+                {
+                    "name": "asc",
+                    "description": "Whether the sort is ascending.",
+                    "type": "Bool"
+                }
+            ],
+            "itemtype": "event",
+            "name": "sort",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 50,
+            "description": "Fired when a change in the collection occurs.",
+            "itemtype": "event",
+            "name": "update",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 56,
+            "description": "Fired when a change in model data occurs.",
+            "itemtype": "event",
+            "name": "change",
+            "params": [
+                {
+                    "name": "field",
+                    "description": "The field that changed.",
+                    "type": "String"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 63,
+            "description": "Fired when a change in a model id occurs.",
+            "itemtype": "event",
+            "name": "sync",
+            "params": [
+                {
+                    "name": "oldId",
+                    "description": "The old id to replace.",
+                    "type": "String|number"
+                },
+                {
+                    "name": "newId",
+                    "description": "The new id to update.",
+                    "type": "String|number"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 76,
+            "description": "Binds a collection to jQuery DOM element target.",
+            "itemtype": "method",
+            "name": "bindCollection",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "The jQuery target to bind to.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "collection",
+                    "description": "The collection object to bind.",
+                    "type": "Collection"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 88,
+            "description": "Binds an array to jQuery DOM element target.",
+            "itemtype": "method",
+            "name": "bindList",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "The jQuery target to bind to.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "list",
+                    "description": "The array to bind.",
+                    "type": "Array"
+                },
+                {
+                    "name": "field",
+                    "description": "The field to use as the index.",
+                    "type": "String"
+                },
+                {
+                    "name": "ignore",
+                    "description": "Whether to ignore the data of the field.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 102,
+            "description": "Binds a model to jQuery DOM element target.",
+            "itemtype": "method",
+            "name": "bindModel",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "The jQuery target to bind to.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "model",
+                    "description": "The model to bind.",
+                    "type": "Model"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 114,
+            "description": "Binds an object to jQuery DOM element target.",
+            "itemtype": "method",
+            "name": "bindModel",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "The jQuery target to bind to.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "model",
+                    "description": "The model to bind.",
+                    "type": "Model"
+                },
+                {
+                    "name": "field",
+                    "description": "The field to use as the index.",
+                    "type": "String"
+                },
+                {
+                    "name": "ignore",
+                    "description": "Whether to ignore the data of the field.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 128,
+            "description": "Binds raw primative data to a jQuery DOM element target.",
+            "itemtype": "method",
+            "name": "bindItem",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "The jQuery target to bind to.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "item",
+                    "description": "The item data to bind.",
+                    "type": "String|number|Date"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 140,
+            "description": "Called when a collection emits an add event. Inserts a new\nitem into the DOM at a specific index.",
+            "itemtype": "method",
+            "name": "onAdd",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 155,
+            "description": "Called when a collection emits a remove. Removes an existing\nitem from the DOM at a specific index.",
+            "itemtype": "method",
+            "name": "onRemove",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 169,
+            "description": "Called when a collection emits a remove event. Removes an existing\nitem from the DOM at a specific index.",
+            "itemtype": "method",
+            "name": "onSort",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 183,
+            "description": "Called when a collection emits an update event. This will refresh the DOM\nand replace the existing data with fresh data.",
+            "itemtype": "method",
+            "name": "onUpdate",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 196,
+            "description": "Called when a model emits an change event. This will update any instances\nof the model in the DOM with the correct data.",
+            "itemtype": "method",
+            "name": "onChange",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 211,
+            "description": "Called when a new model is synced with the server and has an id assigned to it. This\nwill update the model in the DOM with the new id.",
+            "itemtype": "method",
+            "name": "onSync",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 243,
+            "description": "Stores a reference to the jQuery target object.",
+            "itemtype": "property",
+            "name": "_target",
+            "type": "{jQuery}",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 251,
+            "description": "Stores the html text of the original target. Unbinding reverts to this markup.",
+            "itemtype": "property",
+            "name": "_template",
+            "type": "{string}",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 259,
+            "description": "Stores a reference to the data being bound.",
+            "itemtype": "property",
+            "name": "_data",
+            "type": "{object|array|Model|Collection|Date|string|number}",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 267,
+            "description": "Stores handles to all the items bound to listen for model changes.",
+            "itemtype": "property",
+            "name": "_handles",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 276,
+            "description": "Whether the binding is currently in the process of binding.",
+            "itemtype": "property",
+            "name": "_isBinding",
+            "type": "{bool}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 285,
+            "description": "Whether the target is already bound with data.",
+            "itemtype": "property",
+            "name": "_isBound",
+            "type": "{bool}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 296,
+            "description": "Binds data to a DOM element, using HTML5's **Microdata** specification for bindings. If\nthe element is already bound with data, that data will be removed and replaced.",
+            "itemtype": "method",
+            "name": "bind",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data to bind to the DOM.",
+                    "type": "Object|array|Model|Collection|Date|string|number"
+                },
+                {
+                    "name": "live",
+                    "description": "Whether to live bind the data.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 308,
+            "description": "Unbinds data from a DOM element, returning it to its original state.",
+            "itemtype": "method",
+            "name": "unbind",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/binding.js",
+            "line": 317,
+            "description": "Destroys a binding, removing all references to DOM elements and models.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Binding",
+            "module": "Data"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 26,
+            "description": "Fired when a change in the network connection to online occurs.",
+            "itemtype": "event",
+            "name": "online",
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 32,
+            "description": "Fired when a change in the network connection to offline occurs.",
+            "itemtype": "event",
+            "name": "offline",
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 57,
+            "description": "Stores whether or not to poll the server.",
+            "itemtype": "property",
+            "name": "_poll",
+            "type": "{bool}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 66,
+            "description": "Whether or not the connection is online.",
+            "itemtype": "property",
+            "name": "_isOnline",
+            "type": "{bool}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 75,
+            "description": "Whether or not the cache has loaded.",
+            "itemtype": "property",
+            "name": "_isLoaded",
+            "type": "{bool}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 84,
+            "description": "The currently running ping process.",
+            "itemtype": "property",
+            "name": "_process",
+            "type": "{bool}",
+            "access": "private",
+            "tagname": "",
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 94,
+            "description": "Pings the network connection to check if it is active or inactive.",
+            "itemtype": "method",
+            "name": "ping",
+            "return": {
+                "description": "A promise that resolves when online and rejects when offline.",
+                "type": "Promise"
+            },
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 104,
+            "description": "Checks if the current connection is online.",
+            "itemtype": "method",
+            "name": "isOnline",
+            "return": {
+                "description": "A boolean representing the connection status.",
+                "type": "Bool"
+            },
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/cache.js",
+            "line": 114,
+            "description": "Checks if checking the network status is supported.",
+            "itemtype": "method",
+            "name": "isSupported",
+            "return": {
+                "description": "A boolean representing the browser's support.",
+                "type": "Bool"
+            },
+            "class": "Cache",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 25,
+            "description": "Fired when an item is added to a collection.",
+            "itemtype": "event",
+            "name": "add",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The item added to the collection.",
+                    "type": "*"
+                },
+                {
+                    "name": "index",
+                    "description": "The index of the item to append after. Defaults to the end.",
+                    "type": "*"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 33,
+            "description": "Fired when an item is removed from the collection.",
+            "itemtype": "event",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index or id of the item removed from the collection.",
+                    "type": "Int"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 40,
+            "description": "Fired when a change in the sorting of the collection occurs.",
+            "params": [
+                {
+                    "name": "asc",
+                    "description": "Whether the sort is ascending.",
+                    "type": "Bool"
+                }
+            ],
+            "itemtype": "event",
+            "name": "sort",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 47,
+            "description": "Fired when a change in the collection occurs.",
+            "itemtype": "event",
+            "name": "update",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 67,
+            "description": "Stores an array of the data maintained within the collection.",
+            "itemtype": "property",
+            "name": "_data",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 76,
+            "description": "Stores the original data passed to the collection.",
+            "itemtype": "property",
+            "name": "_source",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 85,
+            "description": "Stores whether the collection is sorted ascending.",
+            "itemtype": "property",
+            "name": "_asc",
+            "type": "{bool}",
+            "default": "true",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 94,
+            "description": "Stores the fields the collection has been sorted on.",
+            "itemtype": "property",
+            "name": "_sorts",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 103,
+            "description": "Stores the key value filters applied to the collection.",
+            "itemtype": "property",
+            "name": "_filters",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 112,
+            "description": "Stores the pagination integer for paginating the collection.",
+            "itemtype": "property",
+            "name": "_paginate",
+            "type": "{int}",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 121,
+            "description": "Stores the current page the collection is on.",
+            "itemtype": "property",
+            "name": "_page",
+            "type": "{int}",
+            "default": "1",
+            "access": "private",
+            "tagname": "",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 132,
+            "description": "Gets an item from the collection by either id or index.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The id or index to lookup.",
+                    "type": "Int|string"
+                }
+            ],
+            "return": {
+                "description": "The item from the collection.",
+                "type": "*"
+            },
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 143,
+            "description": "Appends an item to the end of the collection.",
+            "itemtype": "method",
+            "name": "append",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The item to append to the collection.",
+                    "type": "*"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 153,
+            "description": "Prepends an item to the beginning of the collection.",
+            "itemtype": "method",
+            "name": "prepend",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The item to prepend to the collection.",
+                    "type": "*"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 163,
+            "description": "Inserts an item at specified index in the collection. Zero denotes the\nbeginning of the collection. Id's can also be used, inserting the\nitem after the item with the given id.",
+            "itemtype": "method",
+            "name": "insert",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The id or index to insert after.",
+                    "type": "Int|string"
+                },
+                {
+                    "name": "item",
+                    "description": "The item to insert into the collection.",
+                    "type": "*"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 176,
+            "description": "Removes an item from the collection by a given index or id.",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index or id to remove from the collection.",
+                    "type": "Int|string"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 186,
+            "description": "Clears all the items from the collection. The collection will be restored\nto its original initialized state.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 196,
+            "description": "Returns the number of objects currently in the collection. This does not take\ninto account any applied filters.",
+            "itemtype": "method",
+            "name": "size",
+            "params": [
+                {
+                    "name": "visible",
+                    "description": "Returns only the count of visible items.",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "The number of items in the collection.",
+                "type": "Int"
+            },
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 208,
+            "description": "Filters a collection on a given keyword or set of keywords. The filters will\nbe applied to a specific field, or all fields if none are specified. The filter\ncan also be applied to the existing already filtered list. By default, the list\nwill filter from its unfiltered state.",
+            "itemtype": "method",
+            "name": "filter",
+            "params": [
+                {
+                    "name": "keyword",
+                    "description": "The keyword or array of keywords to filter on.",
+                    "type": "String|array"
+                },
+                {
+                    "name": "field",
+                    "description": "The field to filter on, or none if testing all fields.",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "existing",
+                    "description": "Whether or not to start the filter from the entire set.",
+                    "type": "Bool",
+                    "optional": true
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 223,
+            "description": "Unfilters the current collection, either removing a specific keyword, or\nall filters if none are specified.",
+            "itemtype": "method",
+            "name": "unfilter",
+            "params": [
+                {
+                    "name": "keyword",
+                    "description": "The keyword to remove from filtering.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 234,
+            "description": "Sorts the collection based on a given field or set of fields. If a set is passed\nthe collection will filter on each field in order of precedence.  Sort must\nonly be called before paginating.",
+            "itemtype": "method",
+            "name": "sort",
+            "params": [
+                {
+                    "name": "field",
+                    "description": "The field or fields to sort the collection by.",
+                    "type": "String|array"
+                },
+                {
+                    "name": "direction",
+                    "description": "The direction to filter, ascending is default.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 247,
+            "description": "Reverses the direction of the collection. This will be applied regardless if a\nspecific sort has been applied. Reverse cannot be called while paginated.",
+            "itemtype": "method",
+            "name": "reverse",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 257,
+            "description": "Paginates the collection to a specific number of items. Filter and sorts should\nbe applied prior to pagination, for they cannot be changed while paginated.",
+            "itemtype": "method",
+            "name": "paginate",
+            "params": [
+                {
+                    "name": "limit",
+                    "description": "The number of items per page.",
+                    "type": "Int"
+                },
+                {
+                    "name": "page",
+                    "description": "Optionally what page to start on, defaulting to the first.",
+                    "type": "Int",
+                    "optional": true
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 269,
+            "description": "Removes pagination from the collection returning it to its default state.",
+            "itemtype": "method",
+            "name": "unpaginate",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 278,
+            "description": "Sets the page of the paginated collection, or returns the current page of the\ncollection.",
+            "itemtype": "method",
+            "name": "page",
+            "params": [
+                {
+                    "name": "page",
+                    "description": "The page to goto in the collection. Optionally the current page.",
+                    "type": "Int",
+                    "optional": true
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 289,
+            "description": "Goes to the first page of the paginated collection.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 298,
+            "description": "Goes to the last page of the paginated collection.",
+            "itemtype": "method",
+            "name": "end",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 307,
+            "description": "Goes to the next page of the paginated collection.",
+            "itemtype": "method",
+            "name": "next",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 316,
+            "description": "Goes to the previous page of the paginated collection.",
+            "itemtype": "method",
+            "name": "prev",
+            "params": [],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 326,
+            "description": "Returns an array representation of the entire collection.",
+            "itemtype": "method",
+            "name": "toArray",
+            "params": [
+                {
+                    "name": "visible",
+                    "description": "If set, will only return filtered items.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/collection.js",
+            "line": 336,
+            "description": "Destroys the collection and removes all references to its underlying data.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Collection",
+            "module": "Data"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 38,
+            "description": "Fired when the view controller finishes loading.",
+            "itemtype": "event",
+            "name": "load",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 44,
+            "description": "Fired when the view controller has appeared.",
+            "itemtype": "event",
+            "name": "appear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 50,
+            "description": "Fired when the view controller has disappeared.",
+            "itemtype": "event",
+            "name": "disappear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 56,
+            "description": "Fired when the view controller finishes unloading.",
+            "itemtype": "event",
+            "name": "unload",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 84,
+            "description": "Stores a reference to the global application.",
+            "itemtype": "property",
+            "name": "_app",
+            "type": "{Application}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 94,
+            "description": "Stores a reference to the parent view, or null if the root.",
+            "itemtype": "property",
+            "name": "_parent",
+            "type": "{ViewController}",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 103,
+            "description": "Stores the target jQuery object.",
+            "itemtype": "property",
+            "name": "_target",
+            "type": "{jQuery}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 112,
+            "description": "Stores the attributes of the target DOM node.",
+            "itemtype": "property",
+            "name": "_attrs",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 121,
+            "description": "Stores references to child view controllers of the current view controller.",
+            "itemtype": "property",
+            "name": "_views",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 130,
+            "description": "Stores references to child forms of the current view controller.",
+            "itemtype": "property",
+            "name": "_forms",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 139,
+            "description": "Stores references to child elements of the current view controller.",
+            "itemtype": "property",
+            "name": "_elems",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 149,
+            "description": "An object containing references any current binding objects.",
+            "itemtype": "property",
+            "name": "_bindings",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 158,
+            "description": "An object containing references to the source of the target.",
+            "itemtype": "property",
+            "name": "_source",
+            "type": "{string}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 167,
+            "description": "Whether the view controller has been initialized.",
+            "itemtype": "property",
+            "name": "_isInitialized",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 176,
+            "description": "Whether the view controller is loaded.",
+            "itemtype": "property",
+            "name": "_isLoaded",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 185,
+            "description": "Whether the view controller is visible.",
+            "itemtype": "property",
+            "name": "_isVisible",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 194,
+            "description": "Whether the view controller is online.",
+            "itemtype": "property",
+            "name": "_isOnline",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 205,
+            "description": "Returns an data attribute from the DOM target element by name.",
+            "itemtype": "method",
+            "name": "attr",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the data attribute.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The value of the data attribute.",
+                "type": "String"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 216,
+            "description": "Returns the string represention of the view controller.",
+            "itemtype": "method",
+            "name": "toString",
+            "return": {
+                "description": "The string of the view.",
+                "type": "String"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 226,
+            "description": "Destroys the view controller and all of its children.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 240,
+            "description": "This is a helper method that stores all event bindings associated with a view controller.\nEvents are bound to child view controllers, child forms, child elements, on the view controller\ntarget. This method should return an object keyed by the name of what to bind to (view\ncontroller, form, element). The values should be objects themselves, keyed by the event name\nwith a value of the function callback to execute. The view controller will auto proxy itself\nas the context of each callback. The *$target* keyword can be used in place of a name to\nbind an event to the entireDOM target. Beware, events bound to view controllers are custom\njavascript events, events bound to forms and elements are jQuery DOM events.",
+            "itemtype": "method",
+            "name": "getBindings",
+            "return": {
+                "description": "The events bindings object.",
+                "type": "Object"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 257,
+            "description": "This is a helper method that stores all expected child view controllers, forms, and elements\nthat can be referenced in the view. Implement this for any custom controllers you build, for\nit will warn the user that they are missing specific required [data-name] outlets in their\nview. The method should return an object with up to three keys, views, forms, and elements,\neach with an array of the expected **[data-name]** attribute values.",
+            "itemtype": "method",
+            "name": "getOutlets",
+            "return": {
+                "description": "The outlets bindings object.",
+                "type": "Object"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 271,
+            "description": "This is a helper method handles browser hash route transitions. It should return an object\nkeyed by the route fragment for this specific view controller. Route fragments are concatenated\nfor each level of the view controller hierarchy to build the entire hash. As an example, a\nthree level deep view controller hierarchy might have a route of /one/two/three, where *one* is\nthe route passed to the root view controller, *two* is passed to the root view controller's\nchildren, and so on. This method should return an object keyed by those partial route, *one*\nor *two* as an example. Route fragments can also take in custom params. A route of /one:id\nwill pass the value of *2* from the hash /one/2/two/three to the view controller.\n    \nThe method should return an object with values as function callbacks for when each route is\nactivated. The function will be passed two arguments, *current* the name of the current view,\nand params, an object containing the hash custom parameters (like id: 2) if any exist.",
+            "itemtype": "method",
+            "name": "getRoutes",
+            "return": {
+                "description": "The routes bindings object.",
+                "type": "Object"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 297,
+            "description": "Sets the current hash to the view controller.",
+            "itemtype": "method",
+            "name": "setHash",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "routes",
+                    "description": "An array of the hash split by its forward slash.",
+                    "type": "Array"
+                },
+                {
+                    "name": "subhash",
+                    "description": "The remaining hash string.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 310,
+            "description": "Sets the current route of the view controller. This can be called from\nwithin the view controller to change the route.",
+            "itemtype": "method",
+            "name": "setRoute",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "route",
+                    "description": "The string of the route to set, excluding any custom parameters.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 323,
+            "description": "Returns the current route for the view controller.",
+            "itemtype": "method",
+            "name": "getRoute",
+            "return": {
+                "description": "The current route minus custom parameters.",
+                "type": "String"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 338,
+            "description": "Checks if the view controller has a given state.",
+            "itemtype": "method",
+            "name": "hasState",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "The name of the state to check",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Whether the view controller has that state.",
+                "type": "Bool"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 349,
+            "description": "Returns the current states of the view controller.",
+            "itemtype": "method",
+            "name": "getState",
+            "return": {
+                "description": "An array of the current active states.",
+                "type": "Array"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 359,
+            "description": "Sets a state on the view controller. This corresponds to adding a class\non the target DOM element.",
+            "itemtype": "method",
+            "name": "setState",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "state",
+                    "description": "A string or array of states to set.",
+                    "type": "String|array"
+                },
+                {
+                    "name": "wait",
+                    "description": "An optional duration to wait in the queue after setting the state.",
+                    "type": "Int",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 373,
+            "description": "Replaces a state on the view controller.",
+            "itemtype": "method",
+            "name": "replaceState",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "current",
+                    "description": "A string of the state to replace",
+                    "type": "String"
+                },
+                {
+                    "name": "state",
+                    "description": "A string of the state to replace it with.",
+                    "type": "String"
+                },
+                {
+                    "name": "wait",
+                    "description": "An optional duration to wait in the queue after setting the state.",
+                    "type": "Int",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 387,
+            "description": "Removes a state from the view controller.",
+            "itemtype": "method",
+            "name": "clearState",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "state",
+                    "description": "An optional state to remove, all states are removed by default.",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "wait",
+                    "description": "An optional duration to wait in the queue after setting the state.",
+                    "type": "Int",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 405,
+            "description": "Loads the view controller if it isn't already loaded. This method will cycle through the\nonWillLoad/onLoad/onDidLoad methods.",
+            "itemtype": "method",
+            "name": "load",
+            "chainable": 1,
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 417,
+            "description": "Shows the view controller if it isn't already visible. This method will cycle through the\nonWillAppear/onAppear/onDidAppear methods.",
+            "itemtype": "method",
+            "name": "show",
+            "chainable": 1,
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 429,
+            "description": "Hides the view controller if it isn't already loaded. This method will cycle through the\nonWillDisappear/onDisappear/onDidDisappear methods.",
+            "itemtype": "method",
+            "name": "hide",
+            "chainable": 1,
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 441,
+            "description": "Unloads the view controller if it isn't already loaded. This method will cycle through the\nonWillUnload/onUnload/onDidUnload methods.",
+            "itemtype": "method",
+            "name": "unload",
+            "chainable": 1,
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 453,
+            "description": "Appends the view controller's target to the DOM.",
+            "itemtype": "method",
+            "name": "append",
+            "chainable": 1,
+            "beta": 1,
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "The selector to append the target inside.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 466,
+            "description": "removes the view controller's target from the DOM.",
+            "itemtype": "method",
+            "name": "remove",
+            "chainable": 1,
+            "return": {
+                "description": "The view controller for chaining.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 482,
+            "description": "Begins the loading sequence for a view controller. Anything that should persist\nwhile the view controller is in the background and doesn't need the view controller's children\nloaded should be setup here.\n\n*Beware, forgetting to call `this._super()` in any override will stop the appearing sequence.*",
+            "itemtype": "method",
+            "name": "onWillLoad",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 495,
+            "description": "Continues the loading sequence for a view controller. This is where all child view controllers\nare recursively loaded.",
+            "itemtype": "method",
+            "name": "onLoad",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 505,
+            "description": "Finishes the loading sequence for a view controller. Anything that should persist\nwhile the view controller is in the background and needs the view controller's children\nto be loaded already should be setup here.",
+            "itemtype": "method",
+            "name": "onDidLoad",
+            "fires": "load",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 517,
+            "description": "Begins the appearing sequence for a view controller. Anything that should be bound before\na view is visible in the DOM should be setup here. Note, custom bindings from the\ngetBindings() method are setup here.\n\n*Beware, forgetting to call `this._super()` in any override will stop the appearing sequence.*",
+            "itemtype": "method",
+            "name": "onWillAppear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 530,
+            "description": "Continues the appearing sequence for a view controller. This is where all child view\ncontrollers are recursively shown. A class of hidden is removed from the *target*\nwhen this method finishes. This style can been implemented in CSS.",
+            "itemtype": "method",
+            "name": "onAppear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 541,
+            "description": "Finishes the appearing sequence for a view controller. Anything that should be setup after\nthe view is already visible in the DOM should be setup here.",
+            "itemtype": "method",
+            "name": "onDidAppear",
+            "fires": "appear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 552,
+            "description": "Begins the disappearing sequence for a view controller. Anything that should be unbound\nwhen a view becomes hidden in the DOM should be setup here (ie. events, plugins, etc).\nNote, custom bindings from the `getBindings()` method are detached here.\n\n*Beware, forgetting to call `this._super()` in any override will stop the disappearing\nsequence.*",
+            "itemtype": "method",
+            "name": "onWillDisappear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 566,
+            "description": "Continues the disappearing sequence for a view controller. This is where all child view\ncontrollers are recursively hidden. A class of hidden is added to the *target*\nwhen this method begins. This style can been implemented in CSS.",
+            "itemtype": "method",
+            "name": "onDisappear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 577,
+            "description": "Finishes the disappearing sequence for a view controller. Anything that should be setup\nafter the view has been hidden in the DOM should be setup here.",
+            "itemtype": "method",
+            "name": "onDidDisappear",
+            "fires": "disappear",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 588,
+            "description": "Begins the unloading sequence for a view controller. Anything that should be destroyed\nwhen a view unloads from memory should be handled here (ie. models, cleanup, etc).\n\n*Beware, forgetting to call `this._super()` in any override will stop the unloading\nsequence.*",
+            "itemtype": "method",
+            "name": "onWillUnload",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 601,
+            "description": "Continues the unloading sequence for a view controller. This is where all child view\ncontrollers are recursively unloaded.",
+            "itemtype": "method",
+            "name": "onUnload",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 611,
+            "description": "Finishes the unloading sequence for a view controller. Anything that should be setup\nafter all child views have unloaded should be setup here.",
+            "itemtype": "method",
+            "name": "onDidUnload",
+            "fires": "unload",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 627,
+            "description": "Returns a child view controller instance by the name corresponding to its **[data-name]** tag.",
+            "itemtype": "method",
+            "name": "getView",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the view controller.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The view controller instance.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 638,
+            "description": "Returns a child form instance by the name corresponding to its **name=\"\"** attribute.",
+            "itemtype": "method",
+            "name": "getForm",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the form.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The form instance.",
+                "type": "Form"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 649,
+            "description": "Returns a element instance by the name corresponding to its **[data-name]** tag.",
+            "itemtype": "method",
+            "name": "getElement",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the element.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The jQuery object referencing the element.",
+                "type": "JQuery"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 660,
+            "description": "Checks if a view controller exists with a given name.",
+            "itemtype": "method",
+            "name": "hasView",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the view controller.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Whether the view exists as a child of the view controller.",
+                "type": "Bool"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 671,
+            "description": "Checks if a form exists with a given name.",
+            "itemtype": "method",
+            "name": "hasForm",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the form.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Whether the form exists as a child of the view controller.",
+                "type": "Bool"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 682,
+            "description": "Checks if a element exists with a given name.",
+            "itemtype": "method",
+            "name": "hasElement",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the element.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Whether the element exists in the view.",
+                "type": "Bool"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 698,
+            "description": "Adds a new view controller as a child of the current view controller.",
+            "itemtype": "method",
+            "name": "addView",
+            "params": [
+                {
+                    "name": "control",
+                    "description": "The type of the view controller.",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "The name to give the view controller.",
+                    "type": "String"
+                },
+                {
+                    "name": "path",
+                    "description": "The path to load the view from.",
+                    "type": "String"
+                },
+                {
+                    "name": "setup",
+                    "description": "If true, it will be loaded to the same state of the parent.",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "The ViewController that was just added.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 712,
+            "description": "Removes a child view controller by name from the current view controller.",
+            "itemtype": "method",
+            "name": "removeView",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the view controller to remove.",
+                    "type": "String"
+                }
+            ],
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 727,
+            "description": "Binds data to an element within the view controller. Bindings use the HTML5 microdata\ntagging system to bind data to the DOM. The **[itemprop]** attribute corresponds to a model\nfield and the **[itemscope]** attribute anticipates receiving a model as its binding.",
+            "itemtype": "method",
+            "name": "bind",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "The name of the element to bind the data to.",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "The data to bind to the DOM.",
+                    "type": "Object|array|Model|Collection|Date|string|number"
+                },
+                {
+                    "name": "live",
+                    "description": "Whether any model changes should update the DOM automatically.",
+                    "type": "Bool",
+                    "optional": true
+                }
+            ],
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 741,
+            "description": "Unbinds an existing binding from an element by name. Only one binding can exist on an\nelement at a given time.",
+            "itemtype": "method",
+            "name": "unbind",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "The name of the element to unbind the data from.",
+                    "type": "String"
+                }
+            ],
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 757,
+            "description": "Called when the connection state of the application goes online, or manually if the application\nis not managing connection state. Any changes that should occur to the view when the\nconnection goes offline should be setup here.",
+            "itemtype": "method",
+            "name": "goOnline",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 768,
+            "description": "Called when the connection state of the application goes offline, or manually if the application\nis not managing connection state. Any changes that should occur to the view when the\nconnection goes offline should be setup here.",
+            "itemtype": "method",
+            "name": "goOnline",
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 779,
+            "description": "Checks if the current connection is online.",
+            "itemtype": "method",
+            "name": "isOnline",
+            "return": {
+                "description": "A boolean representing the connection status.",
+                "type": "Bool"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 797,
+            "description": "Finds a view controller by its type string.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type string to lookup on.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The class object for the view controller.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 805,
+            "description": "Extends an existing view controller class.",
+            "itemtype": "method",
+            "name": "extend",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "The definition object for the class.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The class object for the new view controller.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/controller.js",
+            "line": 813,
+            "description": "Includes a mixin in an existing view controller class.",
+            "itemtype": "method",
+            "name": "includes",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "The mixin object to apply.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The updated class object for the view controller.",
+                "type": "ViewController"
+            },
+            "class": "ViewController",
+            "module": "UI"
+        },
+        {
+            "file": "api/location.js",
+            "line": 25,
+            "description": "The cache coordinates return from the navigator.",
+            "itemtype": "property",
+            "name": "_location",
+            "access": "private",
+            "tagname": "",
+            "type": "{Coordinates}",
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 33,
+            "description": "The timestamp of the last successful geolocation request.",
+            "itemtype": "property",
+            "name": "_timestamp",
+            "access": "private",
+            "tagname": "",
+            "type": "{int}",
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 41,
+            "description": "The default time-to-live for the geolocation cache.",
+            "itemtype": "property",
+            "name": "_ttl",
+            "access": "private",
+            "tagname": "",
+            "type": "{int}",
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 50,
+            "description": "Checks if the current location is expired.",
+            "itemtype": "method",
+            "name": "isExpired",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Whether the coordinates are expired.",
+                "type": "Bool"
+            },
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 61,
+            "description": "Called when the geolocation request is successful.",
+            "itemtype": "method",
+            "name": "onSuccess",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "coords",
+                    "description": "The coordinates object returned.",
+                    "type": "Coordinates"
+                }
+            ],
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 72,
+            "description": "Called when the geolocation request fails.",
+            "itemtype": "method",
+            "name": "onFailure",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "ex",
+                    "description": "The exception object returned.",
+                    "type": "Exception"
+                }
+            ],
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 97,
+            "description": "Returns a promise object that resolves with the location coordinates of\nthe browser.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "return": {
+                "description": "A promise that resolves when the location has returned.",
+                "type": "Promise"
+            },
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/location.js",
+            "line": 109,
+            "description": "Checks if checking the browser's location is supported.",
+            "itemtype": "method",
+            "name": "isSupported",
+            "return": {
+                "description": "A boolean representing the browser's support.",
+                "type": "Bool"
+            },
+            "class": "Location",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/model.js",
+            "line": 26,
+            "description": "Fired when a change in model data occurs.",
+            "itemtype": "event",
+            "name": "change",
+            "params": [
+                {
+                    "name": "field",
+                    "description": "The field that changed.",
+                    "type": "String"
+                }
+            ],
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 33,
+            "description": "Fired when a change in a model id occurs.",
+            "itemtype": "event",
+            "name": "sync",
+            "params": [
+                {
+                    "name": "old",
+                    "description": "The old id to replace.",
+                    "type": "String|number"
+                },
+                {
+                    "name": "new",
+                    "description": "The new id to update.",
+                    "type": "String|number"
+                }
+            ],
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 41,
+            "description": "Fired when a change in a model is request.",
+            "itemtype": "event",
+            "name": "refresh",
+            "params": [
+                {
+                    "name": "model",
+                    "description": "The type of the model to refresh.",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "The id to update from the service.",
+                    "type": "String|number"
+                }
+            ],
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 64,
+            "description": "Stores the id of the model.",
+            "itemtype": "property",
+            "name": "_id",
+            "type": "{string|int}",
+            "access": "private",
+            "tagname": "",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 72,
+            "description": "Stores the formatted data of the model.",
+            "itemtype": "property",
+            "name": "_data",
+            "type": "{object}",
+            "access": "private",
+            "tagname": "",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 80,
+            "description": "Stores an array of the updates to the model, for undo purposes.",
+            "itemtype": "property",
+            "name": "_changes",
+            "type": "{array}",
+            "access": "private",
+            "tagname": "",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 88,
+            "description": "Whether the module is currently changed and has not saved that change\nto the server.",
+            "itemtype": "property",
+            "name": "_isChanged",
+            "type": "{bool}",
+            "access": "private",
+            "tagname": "",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 99,
+            "description": "This method must be implemented, laying out the model's fields and their\nproperties and types. The fields object returned is keyed by the field name.\nThe value is an object, implementing various properties associated with the\nspecific type of that field. The **type** property is required. Supported field\ntypes can be found in the Model.Fields object as constants.",
+            "itemtype": "method",
+            "name": "getFields",
+            "return": {
+                "description": "The field mapping for the object.",
+                "type": "Object"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 113,
+            "description": "This method must be implemented to set the model to emit change events for\nlive server updates.",
+            "itemtype": "method",
+            "name": "getLive",
+            "return": {
+                "description": "Whether the model live saves to the server.",
+                "type": "Bool"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 124,
+            "description": "Returns the value of a given field from a model.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the field to read.",
+                    "type": "String"
+                },
+                {
+                    "name": "alt",
+                    "description": "An alternative value to return if the field isn't set.",
+                    "type": "*"
+                }
+            ],
+            "return": {
+                "description": "The value of the field read.",
+                "type": "*"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 136,
+            "description": "Sets the value of a given field on a model.",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the field to set.",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The value to set to the field.",
+                    "type": "*"
+                }
+            ],
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 147,
+            "description": "Clears the value of a given field on a model.",
+            "itemtype": "method",
+            "name": "clear",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the field to clear.",
+                    "type": "String"
+                }
+            ],
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 157,
+            "description": "Emits a request for a model refresh. A service must be defined to handle\nthis request for a given model and id.",
+            "itemtype": "method",
+            "name": "refresh",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 167,
+            "description": "Goes back to the previous state of the model. The model stores the recent\nhistory of it's changes.",
+            "itemtype": "method",
+            "name": "undo",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 177,
+            "description": "Returns the id for the given model.",
+            "itemtype": "method",
+            "name": "id",
+            "return": {
+                "description": "The id of the model.",
+                "type": "String|number"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 187,
+            "description": "Whether the model has unsaved changes with the server.",
+            "itemtype": "method",
+            "name": "isChanged",
+            "return": {
+                "description": "Whether the model is unsaved.",
+                "type": "Bool"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 197,
+            "description": "Returns an object representing the model's fields.",
+            "itemtype": "method",
+            "name": "toObject",
+            "return": {
+                "description": "A cloned object representing the model.",
+                "type": "Object"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 207,
+            "description": "Returns a string representing the model.",
+            "itemtype": "method",
+            "name": "toString",
+            "return": {
+                "description": "A string representation of the model.",
+                "type": "Object"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 217,
+            "description": "Destroys a given model and all it's references.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 233,
+            "description": "Finds a model by its type string.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type string to lookup on.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The class object for the model.",
+                "type": "Model"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 241,
+            "description": "Extends an existing model class.",
+            "itemtype": "method",
+            "name": "extend",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "The definition object for the class.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The class object for the new model.",
+                "type": "Model"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/model.js",
+            "line": 249,
+            "description": "Includes a mixin in an existing model class.",
+            "itemtype": "method",
+            "name": "includes",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "The mixin object to apply.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The updated class object for the model.",
+                "type": "Model"
+            },
+            "class": "Model",
+            "module": "Data"
+        },
+        {
+            "file": "api/module.js",
+            "line": 35,
+            "description": "When implemented, it should return a unique string name to match the\nclass. This allows classes to be looked up by name.",
+            "itemtype": "method",
+            "name": "getType",
+            "return": {
+                "description": "The unique type name of the class.",
+                "type": "String"
+            },
+            "class": "Module",
+            "module": "Core"
+        },
+        {
+            "file": "api/module.js",
+            "line": 49,
+            "description": "Allows the lookup of a class by the value of its getType() string.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type string to lookup",
+                    "type": "String"
+                }
+            ],
+            "class": "Module",
+            "module": "Core"
+        },
+        {
+            "file": "api/module.js",
+            "line": 60,
+            "description": "Overrides the default extend method to handle implementation\nrequirements. The module will check to be sure any subclasses\nimplement required methods.",
+            "itemtype": "method",
+            "name": "extend",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "An object of functions and properties.",
+                    "type": "Object"
+                },
+                {
+                    "name": "impl",
+                    "description": "An array of method names that are required.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "The newly created module object.",
+                "type": "Module"
+            },
+            "class": "Module",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 91,
+            "description": "Extends an existing class with additional properties\nand methods. The _super() method can be called to invoke\nthe parent prototype's method.",
+            "itemtype": "method",
+            "name": "extend",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "An object of functions and properties.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The newly created class object.",
+                "type": "Class"
+            },
+            "class": "Class",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 110,
+            "description": "Includes a mixin containing functions and methods into the\nclass' prototype. This does not affect inheritance.",
+            "itemtype": "method",
+            "name": "includes",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "An object of functions and properties.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The class object with the mixin included.",
+                "type": "Class"
+            },
+            "class": "Class",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 151,
+            "description": "Stops the event from bubbling to the currentTarget's parent.",
+            "itemtype": "method",
+            "name": "stopPropagation",
+            "class": "EventTarget",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 185,
+            "description": "Detaches the original event referenced by the EventHandle. This is a one\ntime use class and should be removed following detachment.",
+            "itemtype": "method",
+            "name": "detach",
+            "class": "EventHandle",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 214,
+            "description": "Binds a listener to an object's event with a given context.",
+            "itemtype": "method",
+            "name": "on",
+            "requires": [
+                "EventHandle"
+            ],
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "The name of the event. An event prefixed with an underscore won't bubble.",
+                    "type": "String"
+                },
+                {
+                    "name": "call",
+                    "description": "The listener to bind to the event.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "The optional context to bind to the function.",
+                    "type": "Context",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The EventHandle object referencing the bound event.",
+                "type": "EventHandle"
+            },
+            "class": "Events",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 228,
+            "description": "An object containing references to each listener.",
+            "itemtype": "property",
+            "name": "_listeners",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "Events",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 239,
+            "description": "Binds a listen to an object's event only once. After the event is\nfired, the event is immediately detached.",
+            "itemtype": "method",
+            "name": "once",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "The name of the event. An event prefixed with an underscore won't bubble.",
+                    "type": "String"
+                },
+                {
+                    "name": "call",
+                    "description": "The listener to bind to the event.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "The optional context to bind to the function.",
+                    "type": "Context",
+                    "optional": true
+                }
+            ],
+            "class": "Events",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 255,
+            "description": "Triggers an event on an object and causes all listeners bound to\nthat object and parent object's event to execute.",
+            "itemtype": "method",
+            "name": "fire",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "The name of the event.",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "The optional data payload to pass to all callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "class": "Events",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 271,
+            "description": "Detaches listeners from an object. Specifying the event and function\nparameters will remove that specific listener, while specifying just the\nevent name will remove all listeners for that event. No parameters will\nremove all bound listeners to the object.",
+            "itemtype": "method",
+            "name": "detach",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "The optional name of the event to unbind.",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "call",
+                    "description": "The option listener to unbind.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "class": "Events",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 304,
+            "description": "Stores the state of the deferred object.",
+            "itemtype": "property",
+            "name": "_resolved",
+            "type": "{boolean}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 313,
+            "description": "Stores callbacks to execute when resolved.",
+            "itemtype": "property",
+            "name": "_whenDone",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 322,
+            "description": "Stores callbacks to execute when rejected.",
+            "itemtype": "property",
+            "name": "_whenFail",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 331,
+            "description": "Stores callbacks to execute when notified.",
+            "itemtype": "property",
+            "name": "_whenProgress",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 340,
+            "description": "Stores callbacks to execute for resolved and rejected states.",
+            "itemtype": "property",
+            "name": "_whenThen",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 349,
+            "description": "Stores callbacks to execute when finished.",
+            "itemtype": "property",
+            "name": "_whenAlways",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 360,
+            "description": "Resolves the deferred object and executes all of it's done callbacks.",
+            "itemtype": "method",
+            "name": "resolve",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the resolve callbacks.",
+                    "type": "*",
+                    "optional": true,
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 372,
+            "description": "Rejects the deferred object and executes all of it's fail callbacks.",
+            "itemtype": "method",
+            "name": "reject",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the resolve callbacks.",
+                    "type": "*",
+                    "optional": true,
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 384,
+            "description": "Notifies the deferred object of a progress update and executes all of\nits progress callbacks.",
+            "itemtype": "method",
+            "name": "notify",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the resolve callbacks.",
+                    "type": "*",
+                    "optional": true,
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 397,
+            "description": "Returns a promise for the deferred object.",
+            "itemtype": "method",
+            "name": "promise",
+            "chainable": 1,
+            "return": {
+                "description": "The promise object representing the deferred.",
+                "type": "Promise"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 408,
+            "description": "Accepts a callback to bind to the deferred's progress notification.",
+            "itemtype": "method",
+            "name": "progress",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "progress",
+                    "description": "One or more callbacks to bind to progress.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 421,
+            "description": "Accepts a callback to bind to the deferred's resolve notification.",
+            "itemtype": "method",
+            "name": "done",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "done",
+                    "description": "One or more callbacks to bind to resolve.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 434,
+            "description": "Accepts a callback to bind to the deferred's reject notification.",
+            "itemtype": "method",
+            "name": "fail",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "fail",
+                    "description": "One or more callbacks to bind to reject.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 447,
+            "description": "Accepts a callback to bind to the deferred's resolve or reject notifications.",
+            "itemtype": "method",
+            "name": "then",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "done",
+                    "description": "A callback to execute on resolve.",
+                    "type": "Function"
+                },
+                {
+                    "name": "fail",
+                    "description": "A callback to execute on reject.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 461,
+            "description": "Accepts a callback to bind to the either the deferred's resolve or reject\nnotifications.",
+            "itemtype": "method",
+            "name": "always",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "always",
+                    "description": "One or more callbacks to bind to completion.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable reference to the deferred.",
+                "type": "Deferred"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 475,
+            "description": "Checks if the deferred is currently resolved.",
+            "itemtype": "method",
+            "name": "isResolved",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 485,
+            "description": "Checks if the deferred is currently rejected.",
+            "itemtype": "method",
+            "name": "isRejected",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Deferred",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 515,
+            "description": "Stores the state of the promise object.",
+            "itemtype": "property",
+            "name": "_resolved",
+            "type": "{boolean}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 524,
+            "description": "Stores callbacks to execute when resolved.",
+            "itemtype": "property",
+            "name": "_whenDone",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 533,
+            "description": "Stores callbacks to execute when rejected.",
+            "itemtype": "property",
+            "name": "_whenFail",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 542,
+            "description": "Stores callbacks to execute when notified.",
+            "itemtype": "property",
+            "name": "_whenProgress",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 551,
+            "description": "Stores callbacks to execute for resolved and rejected states.",
+            "itemtype": "property",
+            "name": "_whenThen",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 560,
+            "description": "Stores callbacks to execute when finished.",
+            "itemtype": "property",
+            "name": "_whenAlways",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 571,
+            "description": "Accepts a callback to bind to the promise's progress notification.",
+            "itemtype": "method",
+            "name": "progress",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "progress",
+                    "description": "One or more callbacks to bind to progress.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable promise object.",
+                "type": "Promise"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 582,
+            "description": "Accepts a callback to bind to the promise's resolve notification.",
+            "itemtype": "method",
+            "name": "done",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "done",
+                    "description": "One or more callbacks to bind to resolve.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "=  A chainable promise object.",
+                "type": "Promise"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 593,
+            "description": "Accepts a callback to bind to the promise's reject notification.",
+            "itemtype": "method",
+            "name": "fail",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "fail",
+                    "description": "One or more callbacks to bind to reject.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable promise object.",
+                "type": "Promise"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 604,
+            "description": "Accepts a callback to bind to the promise's resolve or reject notifications.",
+            "itemtype": "method",
+            "name": "then",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "done",
+                    "description": "A callback to execute on resolve.",
+                    "type": "Function"
+                },
+                {
+                    "name": "fail",
+                    "description": "A callback to execute on reject.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable promise object.",
+                "type": "Promise"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 616,
+            "description": "Accepts a callback to bind to the either the promise's resolve or reject\nnotifications.",
+            "itemtype": "method",
+            "name": "always",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "always",
+                    "description": "One or more callbacks to bind to completion.",
+                    "type": "Function",
+                    "multiple": true
+                },
+                {
+                    "name": "context",
+                    "description": "An optional context to bind to the callbacks.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A chainable promise object.",
+                "type": "Promise"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 628,
+            "description": "Checks if the promise is currently resolved.",
+            "itemtype": "method",
+            "name": "isResolved",
+            "return": {
+                "description": "Whether the promise is resolved",
+                "type": "Boolean"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 636,
+            "description": "Checks if the promise is currently rejected.",
+            "itemtype": "method",
+            "name": "isRejected",
+            "return": {
+                "description": "Whether the promise is rejected.",
+                "type": "Boolean"
+            },
+            "class": "Promise",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 660,
+            "description": "Stores references to each module and its exports object by name.",
+            "itemtype": "property",
+            "name": "_modules",
+            "type": "{object}",
+            "default": "{}",
+            "access": "private",
+            "tagname": "",
+            "class": "Loader",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 672,
+            "description": "Add a given module and its configuration parameters.",
+            "itemtype": "method",
+            "name": "addModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module to add.",
+                    "type": "String"
+                },
+                {
+                    "name": "fn",
+                    "description": "The function containing the module's code.",
+                    "type": "Function"
+                },
+                {
+                    "name": "required",
+                    "description": "An array of required module dependencies.",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "class": "Loader",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 686,
+            "description": "Loads a given module and its dependent modules by name.",
+            "itemtype": "method",
+            "name": "loadModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module to load.",
+                    "type": "String"
+                }
+            ],
+            "class": "Loader",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 719,
+            "description": "Stores the level of the logger.",
+            "itemtype": "property",
+            "name": "_level",
+            "type": "{string}",
+            "default": "DEBUG",
+            "access": "private",
+            "tagname": "",
+            "class": "Log",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 730,
+            "description": "A wrapper around logging. Allows the application to intercept log\nevent messages and display them to the user.",
+            "itemtype": "method",
+            "name": "setLevel",
+            "params": [
+                {
+                    "name": "level",
+                    "description": "The level to set the logger to.",
+                    "type": "String"
+                }
+            ],
+            "class": "Log",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 741,
+            "description": "Logs a debug message to the console.",
+            "itemtype": "method",
+            "name": "debug",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "The message to log to the console.",
+                    "type": "String"
+                },
+                {
+                    "name": "ex",
+                    "description": "An optional exception or object to log.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Log",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 752,
+            "description": "Logs a info message to the console.",
+            "itemtype": "method",
+            "name": "info",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "The message to log to the console.",
+                    "type": "String"
+                },
+                {
+                    "name": "ex",
+                    "description": "An optional exception or object to log.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Log",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 763,
+            "description": "Logs a warn message to the console.",
+            "itemtype": "method",
+            "name": "warn",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "The message to log to the console.",
+                    "type": "String"
+                },
+                {
+                    "name": "ex",
+                    "description": "An optional exception or object to log.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Log",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 774,
+            "description": "Logs a error message to the console.",
+            "itemtype": "method",
+            "name": "error",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "The message to log to the console.",
+                    "type": "String"
+                },
+                {
+                    "name": "ex",
+                    "description": "An optional exception or object to log.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Log",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 805,
+            "description": "Adds a new module and it's dependencies by name.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module.",
+                    "type": "String"
+                },
+                {
+                    "name": "fn",
+                    "description": "The function containing the module's code.",
+                    "type": "Function"
+                },
+                {
+                    "name": "required",
+                    "description": "An array of required modules to load.",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "class": "Browser",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 817,
+            "description": "Loads a set of modules by name and then executes an optional\nfunction using those modules.",
+            "itemtype": "method",
+            "name": "use",
+            "params": [
+                {
+                    "name": "modules",
+                    "description": "A set of modules to load.",
+                    "type": "String",
+                    "optional": true,
+                    "multiple": true
+                },
+                {
+                    "name": "fn",
+                    "description": "An optional function to call using those modules.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "class": "Browser",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 829,
+            "description": "Includes a module in another and returns the exports object of that module.",
+            "itemtype": "method",
+            "name": "include",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module to include.",
+                    "type": "String"
+                }
+            ],
+            "class": "Browser",
+            "module": "Core"
+        },
+        {
+            "file": "api/orange.js",
+            "line": 839,
+            "description": "Returns a new deferred object that resolves when two existing promises or\ndeferreds have resolved.",
+            "itemtype": "method",
+            "name": "when",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "A set of deferreds to build the new object from.",
+                    "type": "Deferred|Promise",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "A Deferred object that resolves when the arguments resolve.",
+                "type": "Deferred"
+            },
+            "class": "Browser",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 36,
+            "description": "Adds a new function to the queue for execution.",
+            "itemtype": "method",
+            "name": "add",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "The function to execute.",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Optional arguments array to pass the function.",
+                    "type": "Array"
+                },
+                {
+                    "name": "wait",
+                    "description": "A duration to wait after the callback finishes.",
+                    "type": "Int"
+                }
+            ],
+            "return": {
+                "description": "A reference to the class using the mixin.",
+                "type": "*"
+            },
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 48,
+            "description": "An array containing each item in the queue.",
+            "itemtype": "property",
+            "name": "_queue",
+            "type": "{array}",
+            "default": "[]",
+            "access": "private",
+            "tagname": "",
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 57,
+            "description": "An boolean if the queue is executing.",
+            "itemtype": "property",
+            "name": "_running",
+            "type": "{bool}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 66,
+            "description": "A reference to the currently executing process.",
+            "itemtype": "property",
+            "name": "_process",
+            "type": "{bool}",
+            "access": "private",
+            "tagname": "",
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 76,
+            "description": "Clears the queue and returns after the currently executing process\nhas finished. Any waits will be immediately terminated.",
+            "itemtype": "method",
+            "name": "stop",
+            "chainable": 1,
+            "return": {
+                "description": "A reference to the class using the mixin.",
+                "type": "*"
+            },
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 88,
+            "description": "Calls the next process waiting in the queue. This should be called at\nthe end of every queued function to tell the queue to continue. Missing\nthe **next()** call will pause the queue.",
+            "itemtype": "method",
+            "name": "next",
+            "chainable": 1,
+            "return": {
+                "description": "A reference to the class using the mixin.",
+                "type": "*"
+            },
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 101,
+            "description": "Creates a new **Deferred** object and appends it to the queue. When that item\nin the queue is reached, the deferred will resolve.",
+            "itemtype": "method",
+            "name": "defer",
+            "return": {
+                "description": "A Deferred object to bind to.",
+                "type": "Deferred"
+            },
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/queue.js",
+            "line": 112,
+            "description": "Creates a new **Promise** object and appends it to the queue. When that item\nin the queue is reached, the promise will resolve.",
+            "itemtype": "method",
+            "name": "promise",
+            "return": {
+                "description": "A Promise object to bind to.",
+                "type": "Promise"
+            },
+            "class": "Queue",
+            "module": "Core"
+        },
+        {
+            "file": "api/service.js",
+            "line": 27,
+            "description": "Validates a configuration object to be sure all fields are valid and allowed.",
+            "itemtype": "method",
+            "name": "validateConf",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object to validate.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A boolean whether the configuration object is valid.",
+                "type": "Bool"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 39,
+            "description": "Validates a mapping object to be sure all fields are valid and allowed.",
+            "itemtype": "method",
+            "name": "validateMap",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "map",
+                    "description": "The map object to validate.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A boolean whether the map object is valid.",
+                "type": "Bool"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 51,
+            "description": "Maps an inbound array from a service into a collection object.",
+            "itemtype": "method",
+            "name": "arrayToCollection",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "map",
+                    "description": "The map object to validate.",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "The array to map into a collection.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "A collection representing the data.",
+                "type": "Collection"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 64,
+            "description": "Maps an inbound array from a service into a collection object.",
+            "itemtype": "method",
+            "name": "objectToCollection",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "map",
+                    "description": "The map object to validate.",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "The object to map into a collection.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A collection representing the data.",
+                "type": "Collection"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 77,
+            "description": "Maps an inbound array from a service into a collection object.",
+            "itemtype": "method",
+            "name": "objectToModel",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "map",
+                    "description": "The map object to validate.",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "The data to map into a model.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A model representing the data.",
+                "type": "Model"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 90,
+            "description": "Reads the cache for a cached request.",
+            "itemtype": "method",
+            "name": "readCache",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path string to read.",
+                    "type": "String"
+                },
+                {
+                    "name": "method",
+                    "description": "The request method.",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "The parameters passed to the request.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The data that was cached, or undefined if unsuccessful",
+                "type": "*"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 104,
+            "description": "Writes data to the cache for a request.",
+            "itemtype": "method",
+            "name": "writeCache",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path string to cache.",
+                    "type": "String"
+                },
+                {
+                    "name": "method",
+                    "description": "The request method.",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "The parameters passed to the request.",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "The data to write to the cache",
+                    "type": "Object|Model|Collection"
+                }
+            ],
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 118,
+            "description": "Clears the cache by manually expiring objects.",
+            "itemtype": "method",
+            "name": "clearCache",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path string to cache.",
+                    "type": "String"
+                },
+                {
+                    "name": "method",
+                    "description": "The request method.",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "The parameters passed to the request, or for any parameter if empty.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 149,
+            "description": "Stores the base url to request from. This is passed from the app.json.",
+            "itemtype": "property",
+            "name": "_baseUrl",
+            "type": "{string}",
+            "access": "private",
+            "tagname": "",
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 157,
+            "description": "Stores a reference to the auth service.",
+            "itemtype": "property",
+            "name": "_authService",
+            "type": "{Service}",
+            "access": "private",
+            "tagname": "",
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 165,
+            "description": "Whether the service is currently online or offline.",
+            "itemtype": "property",
+            "name": "_isOnline",
+            "type": "{bool}",
+            "access": "private",
+            "tagname": "",
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 175,
+            "description": "Should return the path fragment to be used for all endpoints of the service.",
+            "itemtype": "method",
+            "name": "getPath",
+            "return": {
+                "description": "The path to add to the baseUrl.",
+                "type": "String"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 185,
+            "description": "This handles all requests to the service. A configuration mapping object is passed\nthat stores the information needed to map the response to a readable format.",
+            "itemtype": "method",
+            "name": "request",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path to add to the baseUrl to reach.",
+                    "type": "Path"
+                },
+                {
+                    "name": "method",
+                    "description": "The HTTP method to use.",
+                    "type": "Method"
+                },
+                {
+                    "name": "params",
+                    "description": "The parameters to pass via the request.",
+                    "type": "Params"
+                },
+                {
+                    "name": "config",
+                    "description": "The config object for the endpoint.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A promise that resolves when the request completes.",
+                "type": "Promise"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 200,
+            "description": "A helper function that takes either a model or its id and returns\nthe id.",
+            "itemtype": "method",
+            "name": "modelOrId",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "Either the model or the id.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The id of the model.",
+                "type": "String|int"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 212,
+            "description": "Marks the service as online. Requests will be pushed directly to the server, skipping\nthe cache.",
+            "itemtype": "method",
+            "name": "goOnline",
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 222,
+            "description": "Marks the service as offline. Requests will be looked up in the cache and failed if\nnot results are cached.",
+            "itemtype": "method",
+            "name": "goOnline",
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 232,
+            "description": "Checks if the current connection is online.",
+            "itemtype": "method",
+            "name": "isOnline",
+            "return": {
+                "description": "A boolean representing the connection status.",
+                "type": "Bool"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 242,
+            "description": "Destroys the service and clears all references and in memory objects.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 258,
+            "description": "Finds a service by its type string.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type string to lookup on.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The class object for the service.",
+                "type": "Service"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 266,
+            "description": "Extends an existing service class.",
+            "itemtype": "method",
+            "name": "extend",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "The definition object for the class.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The class object for the new service.",
+                "type": "Service"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/service.js",
+            "line": 274,
+            "description": "Includes a mixin in an existing service class.",
+            "itemtype": "method",
+            "name": "includes",
+            "static": 1,
+            "params": [
+                {
+                    "name": "def",
+                    "description": "The mixin object to apply.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The updated class object for the service.",
+                "type": "Service"
+            },
+            "class": "Service",
+            "module": "Data"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 17,
+            "description": "Stores a reference to the local storage database.",
+            "itemtype": "property",
+            "name": "_db",
+            "access": "private",
+            "tagname": "",
+            "type": "{localStorage}",
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 25,
+            "description": "Whether or not the storage manager is online.",
+            "itemtype": "property",
+            "name": "_isOnline",
+            "access": "private",
+            "tagname": "",
+            "default": "false",
+            "type": "{bool}",
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 47,
+            "description": "Returns the value for a key from localStorage.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "alt",
+                    "description": "An alternate to return if the key is not found.",
+                    "type": "*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": ""
+            },
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 59,
+            "description": "Sets an object value to localStorage for a given key.",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "A key store the local storage object to",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The value to store for the given key",
+                    "type": "*"
+                },
+                {
+                    "name": "ttl",
+                    "description": "An duration in milliseconds for when the object should expire.",
+                    "type": "Int",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": ""
+            },
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 72,
+            "description": "Removes an object from localStorage for a given key.",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "A key to remove from localStorage",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": ""
+            },
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 83,
+            "description": "Flushes all object from the localStorage object. Objects will not be flushed when\noffline unless force is set to true.",
+            "itemtype": "method",
+            "name": "flushExpired",
+            "params": [
+                {
+                    "name": "force",
+                    "description": "Whether to force flush when offline.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 94,
+            "description": "Flushes all expired objects from the localStorage object. Objects will not be flushed\nwhen offline unless force is set to true.",
+            "itemtype": "method",
+            "name": "flush",
+            "params": [
+                {
+                    "name": "force",
+                    "description": "Whether to force flush when offline.",
+                    "type": "Bool"
+                }
+            ],
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 105,
+            "description": "Forces the storage manager online. Data will now be expired or flushed.",
+            "itemtype": "method",
+            "name": "goOnline",
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 114,
+            "description": "Forces the storage manager offline. Data will not be expired or flushed when\noffline unless forced.",
+            "itemtype": "method",
+            "name": "goOffline",
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 124,
+            "description": "Checks if the storage manager is online.",
+            "itemtype": "method",
+            "name": "isOnline",
+            "return": {
+                "description": "A boolean representing the manager's connection status.",
+                "type": "Bool"
+            },
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/storage.js",
+            "line": 134,
+            "description": "Returns a boolean value checking if the localStorage cache is supported.",
+            "itemtype": "method",
+            "name": "isSupported",
+            "return": {
+                "description": "A boolean representing the browser's support.",
+                "type": "Bool"
+            },
+            "class": "Storage",
+            "module": "HTML5"
+        },
+        {
+            "file": "api/view.js",
+            "line": 24,
+            "description": "Returns the source for a cached view by a given name. Multiple views can be stored\nin the same template file. To distingush between them, set the optional parameters control\nand name that correspond to the **[data-control]** and **[data-name]** attributes on the view.\nOmitting both will return the first view it finds. Omitting [data-control] will return the\nfirst view matching **[data-control]** if more than one exists. Views should have unique\n**[data-name]** attributes.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path to look up within.",
+                    "type": "String"
+                },
+                {
+                    "name": "control",
+                    "description": "The optional ViewController type to lookup.",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "name",
+                    "description": "The optional ViewController name to lookup.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "class": "View",
+            "module": "UI"
+        },
+        {
+            "file": "api/view.js",
+            "line": 42,
+            "description": "Registers a list of view paths, retrieves the source of each view asynchronously,\nand caches the view markup for later use. This should be run before your application\nhas launched if you are using any view fragements *(ie. [data-template] attributes)*.\nBy default, the paths registered are relative to the `templates/` directory.",
+            "itemtype": "method",
+            "name": "register",
+            "static": 1,
+            "params": [
+                {
+                    "name": "paths",
+                    "description": "An array of view paths.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "A promise that resolves when the views have been loaded.",
+                "type": "Promise"
+            },
+            "class": "View",
+            "module": "UI"
+        }
+    ]
+}

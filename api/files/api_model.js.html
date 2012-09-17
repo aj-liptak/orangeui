@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>api&#x2F;model.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Application.html">Application</a></li>
+            
+                <li><a href="..&#x2F;classes/Binding.html">Binding</a></li>
+            
+                <li><a href="..&#x2F;classes/Browser.html">Browser</a></li>
+            
+                <li><a href="..&#x2F;classes/Cache.html">Cache</a></li>
+            
+                <li><a href="..&#x2F;classes/Class.html">Class</a></li>
+            
+                <li><a href="..&#x2F;classes/Collection.html">Collection</a></li>
+            
+                <li><a href="..&#x2F;classes/Deferred.html">Deferred</a></li>
+            
+                <li><a href="..&#x2F;classes/EventHandle.html">EventHandle</a></li>
+            
+                <li><a href="..&#x2F;classes/Events.html">Events</a></li>
+            
+                <li><a href="..&#x2F;classes/EventTarget.html">EventTarget</a></li>
+            
+                <li><a href="..&#x2F;classes/Loader.html">Loader</a></li>
+            
+                <li><a href="..&#x2F;classes/Location.html">Location</a></li>
+            
+                <li><a href="..&#x2F;classes/Log.html">Log</a></li>
+            
+                <li><a href="..&#x2F;classes/Model.html">Model</a></li>
+            
+                <li><a href="..&#x2F;classes/Module.html">Module</a></li>
+            
+                <li><a href="..&#x2F;classes/Promise.html">Promise</a></li>
+            
+                <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
+            
+                <li><a href="..&#x2F;classes/Service.html">Service</a></li>
+            
+                <li><a href="..&#x2F;classes/Storage.html">Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/View.html">View</a></li>
+            
+                <li><a href="..&#x2F;classes/ViewController.html">ViewController</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/Core.html">Core</a></li>
+            
+                <li><a href="..&#x2F;modules/Data.html">Data</a></li>
+            
+                <li><a href="..&#x2F;modules/HTML5.html">HTML5</a></li>
+            
+                <li><a href="..&#x2F;modules/UI.html">UI</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: api&#x2F;model.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+&#x2F;&#x2F; Model Class
+&#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+
+&#x2F;**
+ * @module Data
+ *&#x2F;
+(function(Orange) {
+
+  var Model;
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Dependencies
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  var Collection       = Orange.Collection;
+  var Events           = Orange.Events;
+  var Module           = Orange.Module;
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Events
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  &#x2F;**
+   * Fired when a change in model data occurs.
+   * @event change
+   * @param {string} field  The field that changed.
+   *&#x2F;
+  var EVENT_CHANGE = &#x27;change&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in a model id occurs.
+   * @event sync
+   * @param {string|number} old  The old id to replace.
+   * @param {string|number} new  The new id to update.
+   *&#x2F;
+  var EVENT_SYNC = &#x27;sync&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in a model is request.
+   * @event refresh
+   * @param {string} model  The type of the model to refresh.
+   * @param {string|number} id  The id to update from the service.
+   *&#x2F;
+  var EVENT_REFRESH = &#x27;refresh&#x27;;
+
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Class Definition
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+
+  Model = Module.extend({
+    
+    &#x2F;**
+     * @class Model
+     * @extends Module
+     * @constructor
+     * @param {object} data  The source data for the model.
+     *&#x2F;
+    initialize: function(data) {
+      
+      &#x2F;**
+       * Stores the id of the model.
+       * @property _id
+       * @type {string|int}
+       * @private
+       *&#x2F;
+      this._id = null;
+      
+      &#x2F;**
+       * Stores the formatted data of the model.
+       * @property _data
+       * @type {object}
+       * @private
+       *&#x2F;
+      this._data = {};
+      
+      &#x2F;**
+       * Stores an array of the updates to the model, for undo purposes.
+       * @property _changes
+       * @type {array}
+       * @private
+       *&#x2F;
+      this._changes = [];
+      
+      &#x2F;**
+       * Whether the module is currently changed and has not saved that change
+       * to the server.
+       * @property _isChanged
+       * @type {bool}
+       * @private
+       *&#x2F;
+      this._isChanged = false;
+      
+    },
+    
+    &#x2F;**
+     * This method must be implemented, laying out the model&#x27;s fields and their
+     * properties and types. The fields object returned is keyed by the field name.
+     * The value is an object, implementing various properties associated with the
+     * specific type of that field. The **type** property is required. Supported field
+     * types can be found in the Model.Fields object as constants.
+     *
+     * @method getFields
+     * @return {object}  The field mapping for the object.
+     *&#x2F;
+    getFields: function() {
+    
+    },
+    
+    &#x2F;**
+     * This method must be implemented to set the model to emit change events for
+     * live server updates.
+     *
+     * @method getLive
+     * @return {bool}  Whether the model live saves to the server.
+     *&#x2F;
+    getLive: function() {
+      return false;
+    },
+    
+    &#x2F;**
+     * Returns the value of a given field from a model.
+     *
+     * @method get
+     * @param {string} name  The name of the field to read.
+     * @param {*} alt  An alternative value to return if the field isn&#x27;t set.
+     * @return {*}  The value of the field read.
+     *&#x2F;
+    get: function(name, alt) {
+    
+    },
+    
+    &#x2F;**
+     * Sets the value of a given field on a model.
+     *
+     * @method set
+     * @param {string} name  The name of the field to set.
+     * @param {*} value  The value to set to the field.
+     *&#x2F;
+    set: function(name, value) {
+    
+    },
+    
+    &#x2F;**
+     * Clears the value of a given field on a model.
+     *
+     * @method clear
+     * @param {string} name  The name of the field to clear.
+     *&#x2F;
+    clear: function(name) {
+    
+    },
+    
+    &#x2F;**
+     * Emits a request for a model refresh. A service must be defined to handle
+     * this request for a given model and id.
+     *
+     * @method refresh
+     *&#x2F;
+    refresh: function() {
+    
+    },
+    
+    &#x2F;**
+     * Goes back to the previous state of the model. The model stores the recent
+     * history of it&#x27;s changes.
+     *
+     * @method undo
+     *&#x2F;
+    undo: function() {
+    
+    },
+    
+    &#x2F;**
+     * Returns the id for the given model.
+     *
+     * @method id
+     * @return {string|number}  The id of the model.
+     *&#x2F;
+    id: function() {
+    
+    },
+    
+    &#x2F;**
+     * Whether the model has unsaved changes with the server.
+     *
+     * @method isChanged
+     * @return {bool}  Whether the model is unsaved.
+     *&#x2F;
+    isChanged: function() {
+    
+    },
+    
+    &#x2F;**
+     * Returns an object representing the model&#x27;s fields.
+     *
+     * @method toObject
+     * @return {object}  A cloned object representing the model.
+     *&#x2F;
+    toObject: function() {
+    
+    },
+    
+    &#x2F;**
+     * Returns a string representing the model.
+     *
+     * @method toString
+     * @return {object}  A string representation of the model.
+     *&#x2F;
+    toString: function() {
+    
+    },
+    
+    &#x2F;**
+     * Destroys a given model and all it&#x27;s references.
+     *
+     * @method destroy
+     *&#x2F;
+    destroy: function() {
+    
+    }
+  
+  }, [&#x27;getFields&#x27;]);
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Object Methods
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  &#x2F;**
+   * Finds a model by its type string.
+   * @method find
+   * @static
+   * @param {string} type  The type string to lookup on.
+   * @return {Model}  The class object for the model.
+   *&#x2F;
+   
+  &#x2F;**
+   * Extends an existing model class.
+   * @method extend
+   * @static
+   * @param {object} def  The definition object for the class.
+   * @return {Model}  The class object for the new model.
+   *&#x2F;
+   
+  &#x2F;**
+   * Includes a mixin in an existing model class.
+   * @method includes
+   * @static
+   * @param {object} def  The mixin object to apply.
+   * @return {Model}  The updated class object for the model.
+   *&#x2F;
+   
+ 
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Model Constants
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  Model.Field = {
+  
+    KEY:       1,
+    TEXT:      2,
+    URL:       3,
+    DATE:      4,
+    OBJECT:    5,
+    ARRAY:     6,
+    MODEL:     8,
+    MONEY:     9,
+    PERCENT:   10,
+    NUMBER:    11
+    
+  };
+  
+   
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Exports
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  Orange.Model = Model;
+    
+  
+}(Orange));
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

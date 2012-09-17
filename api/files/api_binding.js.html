@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>api&#x2F;binding.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Application.html">Application</a></li>
+            
+                <li><a href="..&#x2F;classes/Binding.html">Binding</a></li>
+            
+                <li><a href="..&#x2F;classes/Browser.html">Browser</a></li>
+            
+                <li><a href="..&#x2F;classes/Cache.html">Cache</a></li>
+            
+                <li><a href="..&#x2F;classes/Class.html">Class</a></li>
+            
+                <li><a href="..&#x2F;classes/Collection.html">Collection</a></li>
+            
+                <li><a href="..&#x2F;classes/Deferred.html">Deferred</a></li>
+            
+                <li><a href="..&#x2F;classes/EventHandle.html">EventHandle</a></li>
+            
+                <li><a href="..&#x2F;classes/Events.html">Events</a></li>
+            
+                <li><a href="..&#x2F;classes/EventTarget.html">EventTarget</a></li>
+            
+                <li><a href="..&#x2F;classes/Loader.html">Loader</a></li>
+            
+                <li><a href="..&#x2F;classes/Location.html">Location</a></li>
+            
+                <li><a href="..&#x2F;classes/Log.html">Log</a></li>
+            
+                <li><a href="..&#x2F;classes/Model.html">Model</a></li>
+            
+                <li><a href="..&#x2F;classes/Module.html">Module</a></li>
+            
+                <li><a href="..&#x2F;classes/Promise.html">Promise</a></li>
+            
+                <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
+            
+                <li><a href="..&#x2F;classes/Service.html">Service</a></li>
+            
+                <li><a href="..&#x2F;classes/Storage.html">Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/View.html">View</a></li>
+            
+                <li><a href="..&#x2F;classes/ViewController.html">ViewController</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/Core.html">Core</a></li>
+            
+                <li><a href="..&#x2F;modules/Data.html">Data</a></li>
+            
+                <li><a href="..&#x2F;modules/HTML5.html">HTML5</a></li>
+            
+                <li><a href="..&#x2F;modules/UI.html">UI</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: api&#x2F;binding.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+&#x2F;&#x2F; Binding Class
+&#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+
+&#x2F;**
+ * The Data Module handles all service connections, data models for the client, live data
+ * bindings to the DOM, and caching.
+ *
+ * @module Data
+ *&#x2F;
+(function(Orange) {
+
+  var Binding;
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Dependencies
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  var Collection   = Orange.Collection;
+  var Model        = Orange.Model;
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Events
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  &#x2F;**
+   * Fired when an item is added to a collection.
+   * @event add
+   * @param {*} item  The item added to the collection.
+   * @param {*} index  The index of the item to append after. Defaults to the end.
+   *&#x2F;
+  var EVENT_ADD = &#x27;add&#x27;;
+  
+  &#x2F;**
+   * Fired when an item is removed from the collection.
+   * @event remove
+   * @param {int} index  The index or id of the item removed from the collection.
+   *&#x2F;
+  var EVENT_REMOVE = &#x27;remove&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in the sorting of the collection occurs.
+   * @param {bool} asc  Whether the sort is ascending.
+   * @event sort
+   *&#x2F;
+  var EVENT_SORT = &#x27;sort&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in the collection occurs.
+   * @event update
+   *&#x2F;
+  var EVENT_UPDATE = &#x27;update&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in model data occurs.
+   * @event change
+   * @param {string} field  The field that changed.
+   *&#x2F;
+  var EVENT_CHANGE = &#x27;change&#x27;;
+  
+  &#x2F;**
+   * Fired when a change in a model id occurs.
+   * @event sync
+   * @param {string|number} oldId  The old id to replace.
+   * @param {string|number} newId  The new id to update.
+   *&#x2F;
+  var EVENT_SYNC = &#x27;sync&#x27;;
+
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Privates
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  &#x2F;**
+   * Binds a collection to jQuery DOM element target.
+   *
+   * @method bindCollection
+   * @private
+   * @param {jQuery} target  The jQuery target to bind to.
+   * @param {Collection} collection  The collection object to bind.
+   *&#x2F;
+  function bindCollection(target, collection) {
+  
+  }
+  
+  &#x2F;**
+   * Binds an array to jQuery DOM element target.
+   *
+   * @method bindList
+   * @private
+   * @param {jQuery} target  The jQuery target to bind to.
+   * @param {array} list  The array to bind.
+   * @param {string} field  The field to use as the index.
+   * @param {bool} ignore  Whether to ignore the data of the field.
+   *&#x2F;
+  function bindList(target, list, field, ignore) {
+  
+  }
+  
+  &#x2F;**
+   * Binds a model to jQuery DOM element target.
+   *
+   * @method bindModel
+   * @private
+   * @param {jQuery} target  The jQuery target to bind to.
+   * @param {Model} model  The model to bind.
+   *&#x2F;
+  function bindModel(target, model) {
+  
+  }
+  
+  &#x2F;**
+   * Binds an object to jQuery DOM element target.
+   *
+   * @method bindModel
+   * @private
+   * @param {jQuery} target  The jQuery target to bind to.
+   * @param {Model} model  The model to bind.
+   * @param {string} field  The field to use as the index.
+   * @param {bool} ignore  Whether to ignore the data of the field.
+   *&#x2F;
+  function bindData(target, data, field, ignore) {
+  
+  }
+  
+  &#x2F;**
+   * Binds raw primative data to a jQuery DOM element target.
+   *
+   * @method bindItem
+   * @private
+   * @param {jQuery} target  The jQuery target to bind to.
+   * @param {string|number|Date} item  The item data to bind.
+   *&#x2F;
+  function bindItem(target, item) {
+  
+  }
+  
+  &#x2F;**
+   * Called when a collection emits an add event. Inserts a new
+   * item into the DOM at a specific index.
+   *
+   * @method onAdd
+   * @private
+   *&#x2F;
+  function onAdd(e) {
+  
+    var item = e.data.item;
+    var index = e.data.index;
+    var target; &#x2F;&#x2F; might need this
+  
+  }
+  
+  &#x2F;**
+   * Called when a collection emits a remove. Removes an existing
+   * item from the DOM at a specific index.
+   *
+   * @method onRemove
+   * @private
+   *&#x2F;
+  function onRemove(e) {
+  
+    var index = e.data.index;
+    var target; &#x2F;&#x2F; might need this
+  
+  }
+  
+  &#x2F;**
+   * Called when a collection emits a remove event. Removes an existing
+   * item from the DOM at a specific index.
+   *
+   * @method onSort
+   * @private
+   *&#x2F;
+  function onSort(e) {
+  
+    var asc = e.data.asc;
+    var target; &#x2F;&#x2F; might need this
+  
+  }
+  
+  &#x2F;**
+   * Called when a collection emits an update event. This will refresh the DOM
+   * and replace the existing data with fresh data.
+   *
+   * @method onUpdate
+   * @private
+   *&#x2F;
+  function onUpdate(e) {
+    
+    var target; &#x2F;&#x2F; might need this
+    
+  }
+    
+  &#x2F;**
+   * Called when a model emits an change event. This will update any instances
+   * of the model in the DOM with the correct data.
+   *
+   * @method onChange
+   * @private
+   *&#x2F;
+  function onChange(e) {
+    
+    var field = e.data.field;
+    var value = e.target instanceof Model ? e.target.get(field) : e.target[field];
+    var target; &#x2F;&#x2F; might need this
+    
+  }
+  
+  &#x2F;**
+   * Called when a new model is synced with the server and has an id assigned to it. This
+   * will update the model in the DOM with the new id.
+   *
+   * @method onSync
+   * @private
+   *&#x2F;
+  function onSync(e) {
+    
+    var oldId = e.data.oldId;
+    var newId = e.data.newId;
+    var target; &#x2F;&#x2F; might need this
+    
+  }
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Class Definition
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+
+  Binding = Class.extend({
+    
+    &#x2F;**
+     * The Binding class allows for live data binding of objects, arrays, Models, and Collections
+     * to DOM elements using HTML5&#x27;s **Microdata** specification.
+     *
+     * @class Binding
+     * @constructor
+     * @param {jQuery} target  A reference to a DOM element that will be used for binding.
+     *&#x2F;
+    initialize: function(target) {
+      
+      &#x2F;**
+       * Stores a reference to the jQuery target object.
+       * @property _target
+       * @type {jQuery}
+       * @private
+       *&#x2F;
+      this._target = target;
+      
+      &#x2F;**
+       * Stores the html text of the original target. Unbinding reverts to this markup.
+       * @property _template
+       * @type {string}
+       * @private
+       *&#x2F;
+      this._template = null;
+      
+      &#x2F;**
+       * Stores a reference to the data being bound.
+       * @property _data
+       * @type {object|array|Model|Collection|Date|string|number}
+       * @private
+       *&#x2F;
+      this._data = null;
+      
+      &#x2F;**
+       * Stores handles to all the items bound to listen for model changes.
+       * @property _handles
+       * @type {array}
+       * @default []
+       * @private
+       *&#x2F;
+      this._handles = [];
+      
+      &#x2F;**
+       * Whether the binding is currently in the process of binding.
+       * @property _isBinding
+       * @type {bool}
+       * @default false
+       * @private
+       *&#x2F;
+      this._isBinding = false;
+      
+      &#x2F;**
+       * Whether the target is already bound with data.
+       * @property _isBound
+       * @type {bool}
+       * @default false
+       * @private
+       *&#x2F;
+      this._isBound = false;
+      
+    },
+    
+    &#x2F;**
+     * Binds data to a DOM element, using HTML5&#x27;s **Microdata** specification for bindings. If
+     * the element is already bound with data, that data will be removed and replaced.
+     *
+     * @method bind
+     * @param {object|array|Model|Collection|Date|string|number} data  The data to bind to the DOM.
+     * @param {bool} live  Whether to live bind the data.
+     *&#x2F;
+    bind: function(data, live) {
+    
+    },
+    
+    &#x2F;**
+     * Unbinds data from a DOM element, returning it to its original state.
+     *
+     * @method unbind
+     *&#x2F;
+    unbind: function() {
+    
+    },
+    
+    &#x2F;**
+     * Destroys a binding, removing all references to DOM elements and models.
+     *
+     * @method destroy
+     *&#x2F;
+    destroy: function() {
+    
+    }
+  
+  });
+  
+  
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  &#x2F;&#x2F; Exports
+  &#x2F;&#x2F; ------------------------------------------------------------------------------------------------
+  
+  Orange.Binding = Binding;
+    
+  
+}(Orange));
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>
