@@ -2118,7 +2118,7 @@ Array.prototype.last = [].last || function() {
     
     for (var i=0; i<views.length; i++) {
       if (typeof control !== 'undefined' && views[i].attr('data-control') !== control) { continue; }
-      if (typeof name !== 'undefined' && views[i].attr('data-name') !== name) { continue; }
+      if (typeof name !== 'undefined' && control !== name && views[i].attr('data-name') !== name && views[i].attr('data-name') !== undefined) { continue; }
       return views[i];
     }
     throw 'Could not find view ' + control + ' at ' + path;
@@ -2131,7 +2131,7 @@ Array.prototype.last = [].last || function() {
       contentType: "text/html; charset=utf-8",
       dataType: "text",
       timeout: 10000,
-      url: path,
+      url: 'templates/' + path,
       success: function(html) {
         success(path, html);
       },
@@ -2989,6 +2989,7 @@ Array.prototype.last = [].last || function() {
         deferred.resolve();
       }
       this.add(resolve);
+      this.next();
       return deferred;
     },
     
@@ -3173,10 +3174,6 @@ Array.prototype.last = [].last || function() {
       return this.add(this._unload);
     },
     
-    append: function() {
-      return this.add(this._append);
-    },
-    
     remove: function() {
       return this.add(this._remove);
     },
@@ -3242,6 +3239,12 @@ Array.prototype.last = [].last || function() {
       // call onWillUnload
       this.onWillUnload();
       
+    },
+    
+    _remove: function() {
+      this.target.remove();
+      this.next();
+      return this;
     },
     
     
@@ -3316,7 +3319,6 @@ Array.prototype.last = [].last || function() {
       
       // unload children
       if (count === 0) {
-        this.target.remove();
         this.fire('_unloaded');
       } else {
         for (var name in this._views) {
@@ -3324,7 +3326,6 @@ Array.prototype.last = [].last || function() {
           view.once('unload', proxy(function() {
             count--;
             if (count === 0) {
-              this.target.remove();
               this.fire('_unloaded');
             }
           }, this));
@@ -3964,7 +3965,7 @@ Array.prototype.last = [].last || function() {
       this.root = new c(null, rootEl, this);
       
       // load the app
-      this.root.load().show();
+      var promise = this.root.load().show().promise();
       
       // set network status
       if (this.online) {
@@ -3977,7 +3978,9 @@ Array.prototype.last = [].last || function() {
       $(window).on('hashchange', proxy(this.onHashChange, this));
       
       // trigger hash change
-      $(window).trigger('hashchange');
+      promise.then(function() {
+        $(window).trigger('hashchange');
+      });
       
       // show the application
       $('body').show();
