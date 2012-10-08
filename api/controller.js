@@ -244,8 +244,9 @@
      * controller, form, element). The values should be objects themselves, keyed by the event name
      * with a value of the function callback to execute. The view controller will auto proxy itself
      * as the context of each callback. The *$target* keyword can be used in place of a name to
-     * bind an event to the entireDOM target. Beware, events bound to view controllers are custom
-     * javascript events, events bound to forms and elements are jQuery DOM events.
+     * bind an event to the entireDOM target. jQuery object bindings can be delegating by adding the
+     * delegated selector in parenthesis, ex. my-element(:myBtn). Beware, events bound to view 
+     * controllers are custom javascript events, events bound to forms and elements are jQuery DOM events. 
      *
      * @method getBindings
      * @return {object} The events bindings object.
