@@ -18,13 +18,15 @@
 
 <script type="text/javascript">
 
-Orange.add('USF.MPO.Controllers.MyController', function(O) {
+Orange.add('USF.MPO.Controllers.One', function(O) {
 
+  console.log('1');
+  
   O.export('one');
 
 }, []);
 
-Orange.add('USF.MPO.Controllers.MyOtherController', function(O) {
+Orange.add('USF.MPO.Controllers.Two', function(O) {
   
   console.log('123');
   
@@ -46,9 +48,9 @@ Orange.add('USF.MPO.Services', function(O) {
 
 }, ['USF.MPO.Models.MyModel']);
 
-Orange.use('USF.MPO.Controllers.MyOtherController', function(O) {
+Orange.use('USF.MPO.Services', function(O) {
 
-  console.log(O.require('USF.MPO.Controllers.MyOtherController'));
+  console.log(O.require('USF.MPO.Models'));
 
 });
 

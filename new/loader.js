@@ -2,59 +2,43 @@
 
   // Loader Definition
   
+  var Module = (function() {
+  
+    function Module(name, fn, requires) {
+    
+      // type check
+      if (typeof fn !== 'function') {
+        throw 'Invalid module definition';
+      }
+    
+      // store properties
+      this.name = name;
+      this.fn = fn;
+      this.requires = requires || [];
+      
+    }
+    
+    return Module;
+    
+  }());
+  
   var Loader = (function() {
   
     var Loader = {};
     
-    var loaded = {};
-    var modules = {};
     var active = {};
+    var modules = {};
     
-    Loader.add = function(name, module, requires) {
+    Loader.add = function(name, fn, requires) {
+      
+      console.log('Adding Module: ' + name);
       
       // split name
-      var parts = name.split('.');
-      var part;
+      var parts = name.split('.'), part;
       var cursor = modules;
       
-      // reserved names
-      var reserved = [
-        'Loader',
-        'Events',
-        'Class',
-        'Model',
-        'Location',
-        'Application',
-        'Binding',
-        'Cache',
-        'Collection',
-        'Controller',
-        'View',
-        'ViewController',
-        'Storage',
-        'Form',
-        'Service',
-        'Log',
-        'Deferred',
-        'Ajax',
-        'Promise',
-        'Element'
-      ];
-      
-      // check name
-      if (parts.length === 0) {
-        throw 'Invalid module name';
-      }
-      
-      // check reserved names
-      for (var i=0; i<reserved.length; i++) {
-        if (reserved[i] === parts[0]) {
-          throw 'Reserved keyword in module name';
-        }
-      }
-      
       // create object
-      var module = { name: name, fn: module, requires: requires };
+      var module = new Module(name, fn, requires);
       
       // build graph
       while (part = parts.shift()) {
@@ -71,11 +55,58 @@
       
     };
     
-    Loader.register = function(name, value) {
-    
+    Loader.use = function(name) {
+      
+      console.log('Using Module: ' + name);
+      
       // split name
-      var parts = name.split('.');
-      var part;
+      var parts = name.split('.'), part;
+      var cursor = modules;
+      
+      // build graph
+      while (part = parts.shift()) {
+        if (cursor.hasOwnProperty(part)) {
+          cursor = cursor[part];
+        } else {
+          throw 'Module not found';  
+        }
+      }
+            
+      // load module
+      Loader.load(cursor);
+      
+    };
+    
+    Loader.load = function(module) {
+
+      if (module instanceof Module) {
+        if (Loader.loaded(module.name)) {
+          console.log('Duplicate Load', module.name);
+          return;
+        }
+        console.log('Loading Module: ' + module.name);
+        for (var i=0; i<module.requires.length; i++) {
+          Loader.use(module.requires[i]);
+        }
+        Orange.export = function(object) {
+          Loader.export(module.name, object);
+        };
+        module.fn.call(this, Orange);
+        delete Orange.export;
+      } else if (typeof module === 'object') {
+        console.log('Loading Module Collection');
+        for (var name in module) {
+          Loader.load(module[name]);
+          console.log('3');
+        }
+      }
+      
+    };
+    
+    Loader.export = function(name, object) {
+      
+      // split name
+      var parts = name.split('.'), part;
       var cursor = active;
       
       // build graph
@@ -85,68 +116,24 @@
             throw 'Overwriting module, already exists';   
           }
           cursor = cursor[part];
-        } else {
-          cursor[part] = parts.length === 0 ? value : {}; 
-          cursor = cursor[part];             
-        }
-      }
-    
-    };
-    
-    Loader.load = function(name) {
-    
-      // split name
-      var parts = name.split('.');
-      var part;
-      var cursor = modules;
-      var requires = {};
-      var fn;
-      
-      // look for module
-      while (part = parts.shift()) {
-        if (cursor.hasOwnProperty(part)) {
+        } else if (parts.length === 0) {
+          cursor[part] = object;
           cursor = cursor[part];
+          console.log('Exporting Module: ' + name, active);
         } else {
-          throw 'Module not found';  
+          cursor[part] = {}; 
+          cursor = cursor[part];  
         }
       }
-            
-      // load requires
-      if (cursor.hasOwnProperty('requires')) {
-        Loader.setup(cursor);
-      } else if (typeof cursor === 'object') {
-        Loader.setupMultiple(cursor);
-      }
       
-      // load module
-      Loader.loadModule(cursor);
-      
-      // return module
-      return cursor;
-    
     };
     
-    Loader.loadModule = function(module) {
-      if (module.hasOwnProperty('fn')) {
-        Orange.export = function(object) {
-          Loader.register(module.name, object);
-        };
-        module.fn.call(this, Orange);
-        delete Orange.export;
-      } else {
-        for (var name in module) {
-          Loader.loadModule(module[name]);
-        }
-      }
-    }
-    
-    Loader.isLoaded = function(name) {
+    Loader.loaded = function(name) {
     
       // split name
-      var parts = name.split('.');
-      var part;
-      var cursor = loaded;
-      
+      var parts = name.split('.'), part;
+      var cursor = active;
+            
       // look for module
       while (part = parts.shift()) {
         if (cursor.hasOwnProperty(part)) {
@@ -154,63 +141,20 @@
         } else {
           return false;
         }
-        return !!cursor;
       }
       
-    };
-    
-    Loader.markLoaded = function(name) {
-      
-      // split name
-      var parts = name.split('.');
-      var part;
-      var cursor = loaded;
-      
-      // look for module
-      while (part = parts.shift()) {
-        if (cursor.hasOwnProperty(part)) {
-          cursor = cursor[part];
-        } else {
-          cursor[part] = parts.length === 0 ? true : {}; 
-          cursor = cursor[part];             
-        }
-      }
-      
-    };
-    
-    Loader.setupMultiple = function(modules) {
-      if (!modules) { return; }
-      for (var module in modules) {
-        if (modules[module].hasOwnProperty('requires')) {
-          Loader.setup(modules[module]);
-        } else {
-          Loader.setupMultiple(modules[module]);
-        }
-      }
-    };
-    
-    Loader.setup = function(module) {
-            
-      // get requires
-      var requires = module.requires;
-      
-      // load requires
-      for (var i=0; i<requires.length; i++) {
-        if (!Loader.isLoaded(requires[i])) {
-          Loader.setup(requires[i]);
-          Loader.markLoaded(module.name);
-        }
-      }
+      return !!cursor;
       
     };
     
     Loader.require = function(name) {
-      
+           
       // split name
-      var parts = name.split('.');
-      var part;
+      var parts = name.split('.'), part;
       var cursor = active;
       
+      console.log('Requiring: ' + name);
+       
       // look for module
       while (part = parts.shift()) {
         if (cursor.hasOwnProperty(part)) {
@@ -219,16 +163,15 @@
           throw 'Module not found';
         }
       }
-      
+       
       return cursor;
-      
+       
     };
   
     return Loader;
   
   }());
-  
-  
+    
   Orange.add = function(name, fn, requires) {
     Loader.add(name, fn, requires);
   };
@@ -239,7 +182,7 @@
     var fn = requires.pop();
         
     for (var i=0; i<requires.length; i++) {
-      Loader.load(requires[i]);
+      Loader.use(requires[i]);
     }
             
     fn.call(this, Orange);
