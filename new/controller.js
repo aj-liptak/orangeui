@@ -8,7 +8,32 @@
   var Browser = Orange.Browser;
   var Element = Orange.Element;
   var Queue = Orange.Queue;
-    
+  var View = Orange.View;
+
+
+  function cloneAttributes(source, destination) {
+    destination = $(destination).eq(0);
+    source = $(source).get(0);
+    for (var i = 0; i < source.attributes.length; i++) {
+      var a = source.attributes[i];
+      destination.attr(a.name, a.value);
+    }
+  }
+  
+  function stripAttributes(obj, match) {
+    var target = $(obj).get(0), attrs = {}, names = [];
+    for (var i = 0, len = target.attributes.length; i < len; i++) {
+      if (target.attributes[i].name.match(match)) {
+        attrs[target.attributes[i].name.replace(match, '')] = target.attributes[i].value;
+        names.push(target.attributes[i].name);
+      }
+    }
+    for (var j = 0; j < names.length; j++) {
+      $(obj).removeAttr(names[j]);
+    }
+    return attrs;
+  }
+  
   
   /** Controller Definition */
   
@@ -26,8 +51,9 @@
       this._parent = parent || null;
       
       // store target
-      this._target = new Element(target);
+      this._target = $(target);
       
+            
       // store app
       this._app = app;
       
@@ -37,18 +63,22 @@
       // load models
       for (var model in models) {
         this.setModel(model, this._app.createModel(models[model]));
+      } 
+      
+      if (!this._target || this._target.length === 0 && typeof this.getDefaultView === 'function') {
+        this._target = View.get(this.getDefaultView());
       }
       
       // store source
       this._source = this._target.outerHTML();
+            
+      // store attributes
+      this._attrs = this.setupAttributes();
       
       // store children
       this._views = this.setupViews();
       this._elems = this.setupElements();
-      
-      // store attributes
-      this._attrs = this.setupAttributes();
-      
+
       // setup events
       this.setupTransitions();
       
@@ -320,9 +350,11 @@
           }
           if (typeof events[event] === 'function') {
             if (delegate && node instanceof Element) {
-              node.on(event, delegate, events[event], this);
-            } else {
+              node.on(event, delegate, proxy(events[event], this));
+            } else if (node instanceof Controller) {
               node.on(event, events[event], this);
+            } else {
+              node.on(event, proxy(events[event], this));
             }
           }
         }
@@ -381,7 +413,7 @@
 
       // unbind events
       for (var view in this._views) { this.getView(view).detach(); }
-      for (var elem in this._elems) { this.getElement(elem).unbind(); }
+      for (var elem in this._elems) { this.getElement(elem).off(); }
       
       // fire disappear event
       this.fire('_disappear');
@@ -448,7 +480,7 @@
     },
     
     getElement: function(name) {
-      if (this._elems[name] instanceof Element) { return this._elems[name]; }
+      if (typeof this._elems[name] !== 'undefined') { return this._elems[name]; }
       throw new Error('Invalid Request: Element "' + name + '" not found');
     },
     
@@ -504,7 +536,7 @@
           
       if (this._initialized) { return; }
       
-      var attrs = this._target.stripAttrs(/data-([A-Za-z\-_]+)/);
+      var attrs = stripAttributes(this._target, /data-/);
             
       if (!attrs.hasOwnProperty('name')) {
         attrs.name = attrs.control;
@@ -542,22 +574,24 @@
       
       var children = this._target.childrenTo('[data-control]');
       var views = {}, name, type, source, path, c;
-            
+      
       for (var i = 0; i < children.length; i++) {
       
         type = children[i].attr('data-control');
-        name = children[i].attr('data-name') || type;
+        name = children[i].attr('data-name');
         path = children[i].attr('data-template');
-  
+                    
         if (path && path.length > 0) {
           source = View.get(path, type, name);
           children[i].html(source.html());
-          children[i].cloneAttrs(source);
+          cloneAttributes(source, children[i]);
           children[i].removeAttr('data-template');
         }
         
+        name = name || type;
+        
         c = Controller.get(type);
-        views[name] = new c(this, children[i], this.app);
+        views[name] = new c(this, children[i], this._app);
         
       }
       
@@ -575,7 +609,7 @@
       for (var i = 0; i < children.length; i++) {
         name = children[i].attr('data-name');
         if (name.length > 0) {
-          elements[name] = new Element(children[i]);
+          elements[name] = children[i];
           children[i].removeAttr('data-name').addClass(name);
         }
       }

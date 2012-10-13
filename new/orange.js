@@ -28,6 +28,27 @@ function proxy(fn, context) {
   };
 }
 
+jQuery.fn.childrenTo = function(selector) {
+  var childList = [];
+  var that = this;
+  this.find(selector).each(function() {
+    var include = false, parent = $(this).parent();
+    while (parent.length !== 0 && !include) {
+      if ($(parent).not($(that)).length === 0) {
+        include = true; break;
+      } else if ($(parent).not('[data-control]').length === 0) {
+        include = false; break;
+      } parent = $(parent).parent();
+    }
+    if (include) { childList.push($(this)); }
+  });
+  return childList;
+}
+
+jQuery.fn.outerHTML = function(s) {
+  return s ? this.before(s).remove() : jQuery('<p>').append(this.eq(0).clone()).html();
+};
+
 
 // ------------------------------------------------------------------------------------------------
 // Core Module
@@ -498,7 +519,7 @@ function proxy(fn, context) {
   
   Orange.add          = add;
   Orange.use          = use;
-  Orange.include      = include;
+  Orange.include      = this.include = include;
   Orange.config       = config;
   Orange.when         = when;
   

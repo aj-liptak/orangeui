@@ -30,7 +30,7 @@
     },
     
     attr: function() {
-      this.target.attr.apply(this.target, arguments);
+      return this.target.attr.apply(this.target, arguments);
     },
     
     removeAttr: function() {
@@ -44,8 +44,7 @@
     },
     
     hasClass: function() {
-      this.target.hasClass.apply(this.target, arguments);
-      return this;
+      return this.target.hasClass.apply(this.target, arguments);
     },
     
     removeClass: function() {
@@ -99,7 +98,7 @@
     },
     
     outerHTML: function(s) {
-      return s ? this.target.before(s).remove() : jQuery('<p>').append(this.target.eq(0).clone()).html();
+      //return s ? this.target.before(s).remove() : jQuery('<p>').append(this.target.eq(0).clone()).html();
     },
     
     html: function(html) {
@@ -112,7 +111,7 @@
     },
     
     cloneAttrs: function(el) {
-      var attrs = el.get(0).attributes;
+      var attrs = el.target.get(0).attributes;
       for (var i = 0; i < attrs.length; i++) {
         this.target.attr(attrs[i].name, attrs[i].value);
       }
@@ -120,7 +119,8 @@
     
     stripAttrs: function(pattern) {
       if (pattern instanceof RegExp) {
-        var attrs = this.target.get(0).attributes;
+        var attrs = $(this.target).get(0).attributes;
+        console.log(attrs);
         var matches = [];
         var match;
         var names = [];
@@ -141,16 +141,17 @@
     
     childrenTo: function(selector) {
       var childList = [];
+      var that = this;
       this.target.find(selector).each(function() {
         var include = false, parent = $(this).parent();
         while (parent.length !== 0 && !include) {
-          if ($(parent).not($(this.target)).length === 0) {
+          if ($(parent).not($(that.target)).length === 0) {
             include = true; break;
           } else if ($(parent).not('[data-control]').length === 0) {
             include = false; break;
           } parent = $(parent).parent();
         }
-        if (include) { childList.push($(this)); }
+        if (include) { childList.push(new Element($(this))); }
       });
       return childList;
     }
