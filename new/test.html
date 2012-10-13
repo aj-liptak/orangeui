@@ -7,6 +7,7 @@
 <script src="http://code.jquery.com/jquery-1.8.1.min.js" type="text/javascript"></script>
 
 <script type="text/javascript" src="orange.js"></script>
+<script type="text/javascript" src="loader.js"></script>
 <script type="text/javascript" src="entity.js"></script>
 <script type="text/javascript" src="queue.js"></script>
 <script type="text/javascript" src="service.js"></script>
@@ -17,8 +18,38 @@
 
 <script type="text/javascript">
 
-Orange.config({
-  'name': 'Test'
+Orange.add('USF.MPO.Controllers.MyController', function(O) {
+
+  O.export('one');
+
+}, []);
+
+Orange.add('USF.MPO.Controllers.MyOtherController', function(O) {
+  
+  console.log('123');
+  
+  O.export('two');
+  
+}, []);
+
+Orange.add('USF.MPO.Models.MyModel', function(O) {
+
+  console.log('thre');
+
+  O.export('three');
+
+}, []);
+
+Orange.add('USF.MPO.Services', function(O) {
+
+  O.export({ the: 'four' });
+
+}, ['USF.MPO.Models.MyModel']);
+
+Orange.use('USF.MPO.Controllers.MyOtherController', function(O) {
+
+  console.log(O.require('USF.MPO.Controllers.MyOtherController'));
+
 });
 
 </script>

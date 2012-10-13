@@ -41,7 +41,6 @@
       this.config.services = config.hasOwnProperty('services') ? config.services : [];
       this.config.views    = config.hasOwnProperty('views')    ? config.views    : [];
       this.config.paths    = config.hasOwnProperty('paths')    ? config.paths    : {};
-      this.config.auth     = config.hasOwnProperty('auth')     ? config.auth     : null;
       
       // set environment
       this.env = config.env || 'DEV';
@@ -164,47 +163,6 @@
       } else {
         this.root.setState(hash.replace('#', '').split('/'));
       }
-    },
-    
-    authenticate: function() {
-      
-      // build auth service
-      var AuthService = this.config.auth;
-      
-      // check for path
-      if (!this.config.paths.hasOwnProperty(this.env)) {
-        throw 'Invalid Service Path: Missing path for environment';
-      }
-      
-      // get path for environment
-      var path = this.config.paths[this.env];
-      
-      // instantiate service
-      this.authService = new AuthService(path);
-      
-      // bind to token event
-      this.authService.on('token', this.onToken, this);
-      
-      // get token
-      var token = this.authService.getToken();
-      
-      // check for token
-      if (token) {
-        
-        // load services
-        console.log('Token acquired: ' + token);
-                
-        this.loadViews();
-        
-      } else {
-        
-        // load services
-        console.log('Warning: Token not found: Services unauthenticated'); // TEMP
-        
-        this.loadViews();
-        
-      }
-  
     },
     
     launch: function() {

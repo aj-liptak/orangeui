@@ -288,60 +288,6 @@ jQuery.fn.outerHTML = function(s) {
   
   
   // ------------------------------------------------------------------------------------------------
-  // Loader Object
-  // ------------------------------------------------------------------------------------------------
-  
-  Loader = (function() {
-  
-    var modules = {};
-    var active = {};
-    var exports = {};
-    
-    Orange.modules = {};
-    
-    return {
-    
-      addModule: function(name, fn, req) {
-      
-        if (!name.match(/[\^\-A-Za-z_]/g)) { throw 'Invalid module name'; }
-        
-        var mod = {
-          name: name,
-          fn: fn,
-          req: (req !== undefined) ? req : []
-        };
-        
-        modules[name] = mod;
-        
-      },
-      
-      loadModule: function(name) {
-                
-        if (active.hasOwnProperty(name)) {
-          return;
-        }
-        
-        if (modules[name] !== undefined) {
-        
-          active[name] = true;
-          
-          for (var i = 0, len = modules[name].req.length; i < len; i++) {
-            if (modules[name].req[i] === name) { continue; }
-            this.loadModule(modules[name].req[i]);
-          }
-          
-          modules[name].fn.call(window, exports);
-          Orange.modules[name] = exports;
-        }
-        
-      }
-      
-    };
-    
-  }());
-  
-  
-  // ------------------------------------------------------------------------------------------------
   // Log Object
   // ------------------------------------------------------------------------------------------------
   
@@ -476,26 +422,6 @@ jQuery.fn.outerHTML = function(s) {
   // Module Functions
   // ------------------------------------------------------------------------------------------------
   
-  function add() {
-    var args = arguments,
-      name = args[0],
-      fn = ( typeof args[1] === 'function' ) ? args[1] : null,
-      req = args[2];
-    Orange.Loader.addModule(name, fn, req);
-  }
-  
-  function use() {
-    var args = Array.prototype.slice.call(arguments),
-      fn = args[args.length-1],
-      req = clone(args).splice(0, args.length-1);
-    if (typeof req[0] !== 'function') {
-      for (var i = 0, len = req.length; i < len; i++) {
-        Orange.Loader.loadModule(req[i]);
-      }
-    }
-    fn.call(window, Orange);
-  }
-  
   function include(name) {
     if (typeof Orange.modules[name] !== undefined) {
       return Orange.modules[name];
@@ -517,8 +443,6 @@ jQuery.fn.outerHTML = function(s) {
   Orange              = this.Orange = { modules: {} };
   Orange.version      = '0.6.0';
   
-  Orange.add          = add;
-  Orange.use          = use;
   Orange.include      = this.include = include;
   Orange.config       = config;
   Orange.when         = when;
