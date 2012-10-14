@@ -18,51 +18,237 @@
 
 <script type="text/javascript">
 
-Orange.add('USF.MPO.Controllers.One', function(O) {
+Orange.add('UI.Controllers.Navigation', function(O) {
 
-  console.log('1');
+  var NavigationController = O.Controller.extend({
   
-  O.export('one');
+    getType: function() {
+      return 'navigation';
+    },
+    
+    getBindings: function() {
+      return {
+        'prev-btn': { 'click': this.onPrev },
+        'next-btn': { 'click': this.onNext }
+      };
+    },
+    
+    onPrev: function(e) {
+      if (this.count === 1) return;
+      this.count--;
+      this.popView('view' + this.count);
+    },
+    
+    onNext: function() {
+      if (this.count === 4) return;
+      this.count++;
+      this.pushView('view' + this.count);
+    },
+    
+    onLoad: function() {
+      
+      // set count
+      this.count = 1;
+      
+      // load specific views
+      var view = this.attr('default');
+      console.log(view);
+      
+      // load view      
+      for (var i in this._views) {
+        if (this._views[i].attr('name') === view) {
+          this.getView(view)._target.addClass('active');
+          this.getView(view).load();
+          this.activeView = this.getView(view);
+        } else {
+          this._views[i]._target.removeClass('hidden').addClass('preload');
+        }
+      }
+      
+      // call super
+      this.fire('_loaded');
+      
+    },
+    
+    onAppear: function() {
+      
+      // load specific views
+      var view = this.attr('default');
+      console.log(view);
+      // load view
+      
+      this.activeView.show();
+      
+      setTimeout(proxy(function() {
+        this._target.addClass('animated');
+      }, this), 500);
+            
+      // call super
+      this.fire('_appeared');
+      
+    },
+    
+    pushView: function(name) {
+      
+      if (this.animating) {
+        return;
+      }
+      
+      this.animating = true;
+      
+      var active = this.activeView;
+      this.getView(name)._target.addClass('active').removeClass('preload');
+      active._target.addClass('unload').removeClass('active');
+      this.activeView = this.getView(name);
+      
+      setTimeout(proxy(function() {
+        this.animating = false;
+      }, this), 500);
+      
+    },
+    
+    popView: function(name) {
+    
+      if (this.animating) {
+        return;
+      }
+      
+      this.animating = true;
+      
+      this.activeView._target.addClass('preload').removeClass('active');
+      this.getView(name)._target.addClass('active').removeClass('unload');
+      this.activeView = this.getView(name);
+      
+      setTimeout(proxy(function() {
+        this.animating = false;
+      }, this), 500);
+      
+    }
+  
+  });
+  
+  O.export(NavigationController);
 
 }, []);
 
-Orange.add('USF.MPO.Controllers.Two', function(O) {
-  
-  console.log('123');
-  
-  O.export('two');
-  
-}, []);
-
-Orange.add('USF.MPO.Models.MyModel', function(O) {
-
-  console.log('thre');
-
-  O.export('three');
-
-}, []);
-
-Orange.add('USF.MPO.Services', function(O) {
-
-  O.export({ the: 'four' });
-
-}, ['USF.MPO.Models.MyModel']);
-
-Orange.use('USF.MPO.Services', function(O) {
-
-  console.log(O.require('USF.MPO.Models'));
-
+Orange.config({
+  name: 'navigaitonTest',
+  required: ['UI.Controllers.Navigation']
 });
 
 </script>
+
+<style type="text/css">
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.prev-btn, .next-btn {
+  position: absolute;
+  z-index: 100;
+}
+
+.prev-btn {
+  left: 100px;
+}
+
+.next-btn {
+  left: 200px;
+}
+
+.view.navigation {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.navigation > .view {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.view.hidden {
+  display: none;
+}
+
+.view1 {
+  background: #FF0;
+}
+
+.view2 {
+  background: #F0F;
+}
+
+.view3 {
+  background: #0FF;
+}
+
+.view4 {
+  background: #0F0;
+}
+
+.navigation.animated .view {
+  -webkit-transition: -webkit-transform 500ms ease-in-out 0s;
+  -moz-transition: -webkit-transform 500ms ease-in-out 0s;
+  transition: -webkit-transform 500ms ease-in-out 0s;
+}
+
+.navigation > .view.preload {
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.navigation > .view.pushed.hidden {
+  display: block;
+}
+
+.navigation > .view.active {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.navigation > .view.active.hidden {
+  display: block;
+}
+
+.navigation > .view.unload {
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.navigation > .view.unload.hidden {
+  display: block;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<div data-control="view" data-name="my-view" data-root>
-
-  Hello
+<div data-control="navigation" data-name="my-view" data-root data-default="view1">
+  
+  
+  
+  <div data-control="view" data-name="view1">One</div>
+  
+  <div data-control="view" data-name="view2">Two</div>
+  
+  <div data-control="view" data-name="view3">Three</div>
+  
+  <div data-control="view" data-name="view4">Four</div>
+  
+  <div data-name="prev-btn">Prev</div>
+  <div data-name="next-btn">Next</div>
 
 </div>
 
