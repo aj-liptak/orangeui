@@ -232,7 +232,7 @@ jQuery.fn.outerHTML = function(s) {
     
     fire: function(ev, data) {
     
-      var parent = this.parent || null;
+      var parent = this._parent || null;
       var evName = ev;
       
       if (typeof ev === 'string') {
@@ -251,8 +251,18 @@ jQuery.fn.outerHTML = function(s) {
         }
       }
       
-      if (parent != null && ev.bubbles && evName[0] !== '_') {
-        ev.currentTarget = this.parent;
+      var ignore = false;
+      
+      if (this._ignoreEvents instanceof Array) {
+        for (var i=0; i<this._ignoreEvents.length; i++) {
+          if (this._ignoreEvents[i] === evName) {
+            ignore = true;
+          }
+        }
+      }
+      
+      if (parent != null && !ignore && ev.bubbles && evName[0] !== '_') {
+        ev.currentTarget = this._parent;
         parent.fire.call(parent, ev, data);
       }
       
@@ -452,7 +462,6 @@ jQuery.fn.outerHTML = function(s) {
   Orange.Deferred     = Deferred;
   Orange.Events       = this.Events = Events;
   Orange.EventHandle  = EventHandle;
-  Orange.Loader       = Loader;
   Orange.Log          = this.Log = new Log();
     
   

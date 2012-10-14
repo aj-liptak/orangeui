@@ -50,7 +50,7 @@
       
       // load required modules
       for (var i=0; i<this.config.required.length; i++) {
-        Loader.loadModule(this.config.required[i]);
+        Loader.use(this.config.required[i]);
       }
       
       // load views
@@ -102,7 +102,7 @@
       var modelInstance = new model();
       
       // fetch services
-      var services = model.getServices();
+      var services = modelInstance.getServices();
       
       // load services
       for (var service in services) {
@@ -158,10 +158,11 @@
     
     onHashChange: function() {
       var hash = location.hash;
+      console.log('Hashchange Detected: ' + hash);
       if (!hash) {
-        this.root.setState();
+        this.root.setRoute();
       } else {
-        this.root.setState(hash.replace('#', '').split('/'));
+        this.root.setRoute(hash.replace('#', '').split('/'));
       }
     },
     
@@ -189,6 +190,9 @@
        // store reference
        this.root = root;
        
+       // bind hash change
+       $(window).bind('hashchange', proxy(this.onHashChange, this)); 
+       
        // load the controller
        root.on('load', function() {
        
@@ -201,10 +205,7 @@
        });
        
        // load root
-       root.load();       
-       
-       // bind hash change
-       $(window).bind('hashchange', proxy(this.onHashChange, this)); 
+       root.load();
 
        // TEMP
        console.log('Launching App: ' + this.config.name);

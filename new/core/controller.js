@@ -53,9 +53,11 @@
       // store target
       this._target = $(target);
       
-            
       // store app
       this._app = app;
+      
+      // store params
+      this._params = {};
       
       // get models
       var models = this.getModels();
@@ -71,6 +73,9 @@
       
       // store source
       this._source = this._target.outerHTML();
+      
+      // prevent bubbling
+      this._ignoreEvents = ['load', 'appear', 'disappear', 'unload'];
             
       // store attributes
       this._attrs = this.setupAttributes();
@@ -78,13 +83,21 @@
       // store children
       this._views = this.setupViews();
       this._elems = this.setupElements();
-
-      // setup events
-      this.setupTransitions();
       
       // store states
       this._loaded = false;
       this._visible = false;
+      this._running = false;
+      
+      // event queue
+      this._loadEvts = [];
+      this._unloadEvts = [];
+      this._showEvts = [];
+      this._hideEvts = [];
+      
+      // queue
+      this._queue = [];
+      this._state;
       
       // remove target if it exists
       if (typeof this._target === 'object') {
@@ -97,8 +110,50 @@
       // mark initialized
       this._initialized = true;
       
-      console.log('Controller "' + this.attr('name') + '" initialized');
+      //console.log('Controller Initialized: "' + this.attr('name'));
       
+    },
+    
+    
+    /** Route Management */
+    
+    getRoutes: function() {
+      return {};
+    },
+    
+    getDefaultRoute: function() {
+      return null;
+    },
+    
+    getDefaultView: function() {
+      return null;
+    },
+    
+    setRoute: function(states) {
+      var first = false;
+      if (!states || states.length === 0) {
+        if (this.getDefaultRoute()) {
+          states = [this.getDefaultRoute()];
+        } else {
+          states = [];
+        }
+      }
+      var original = states.slice(0);
+      var state = states.shift();
+      var statesArray = states.slice(0);
+      var current = this.state || this.getDefaultRoute();
+      var callbacks = this.getRoutes();
+      if (Object.keys(callbacks).length === 0) {
+        for (var i in this.views) {
+          this.getView(i).setRoute(original.slice(0));
+        }
+        return;
+      }
+      if (callbacks.hasOwnProperty(state)) {
+        console.log('Setting Route: "/' + state + (current ? ('" from "' + current) : '') + '" for "' + this.attr('name') + '"'); 
+        callbacks[state].call(this, current, statesArray);
+      }
+      this.state = state;
     },
     
     
@@ -128,6 +183,9 @@
     /* Model Management */
     
     setModel: function(name, model) {
+      if (!this._models) {
+        this._models = {};
+      }
       this._models[name] = model;
     },
     
@@ -137,6 +195,79 @@
       } else {
         throw 'Model Not Found';
       }
+    },
+    
+    
+    /** Queuing */
+    
+    add: function(fn, args, wait) {
+      this._queue.push({fn: fn, args: args, wait: wait});
+      if (!this._running) { this.next(); }
+      return this;
+    },
+
+    next: function() {
+      this._running = true;
+      var next = this._queue.shift();
+      if (next) {
+        next.fn.apply(this, next.args);
+        if (next.fn === this._setState || next.fn === this._clearState) {
+          this._process = setTimeout(proxy(function() {
+            this.next();
+          }, this), next.wait);
+        }
+      } else {
+        this._running = false;
+      }
+    },
+    
+    stop: function() {
+      this._queue = [];
+      if (this._process) {
+        clearTimeout(this._process);
+        this.next();
+      }
+      return this;
+    },
+    
+    
+    /** State Management */
+    
+    setState: function(state, wait) {
+      return this.add(this._setState, [state], wait || 0);
+    },
+    
+    clearState: function(wait) {
+      return this.add(this._clearState, [], wait || 0);
+    },
+    
+    _setState: function(state, force) {
+      if ((this.hasState(state) || !this._loaded) && !force) {
+        return;
+      }
+      this._target.removeClass(this._stateName);
+      this._target.addClass(state);
+      this._stateName = state;
+    },
+    
+    _clearState: function() {
+      this._target.removeClass(this._stateName);
+      this._stateName = null;
+    },
+    
+    hasState: function(state) {
+      return this._stateName === state;
+    },
+    
+    
+    /* CSS Properties */
+
+    addClass: function() {
+      this._target.addClass.apply(this._target, arguments);
+    },
+    
+    removeClass: function() {
+      this._target.removeClass.apply(this._target, arguments);
     },
     
     
@@ -158,6 +289,14 @@
       return this.add(this._unload);
     },
     
+    appendTo: function(target) {
+      return this.add(this._appendTo, [target]);
+    },
+    
+    append: function(target) {
+      return this.add(this._append, [target]);
+    },
+    
     remove: function() {
       return this.add(this._remove);
     },
@@ -166,12 +305,15 @@
     /** Private State Handlers */
     
     _load: function() {
-      
+            
       // return if already loading
       if (this._loaded) {
         this.next(); // fire the next call in the queue
         return;
       }
+      
+      this._loadEvts.push(this.on("_load", this.onLoad, this));
+      this._loadEvts.push(this.on("_loaded", this.onDidLoad, this));
             
       // call onWillLoad
       this.onWillLoad();
@@ -187,7 +329,10 @@
       } else if (!this._loaded) {
         throw new Error('Invalid Request: Cannot show unloaded Controller');
       }
-
+      
+      this._showEvts.push(this.on("_appear", this.onAppear, this));
+      this._showEvts.push(this.on("_appeared", this.onDidAppear, this));
+      
       // call onWillAppear
       this.onWillAppear();
       
@@ -200,6 +345,9 @@
         this.next();
         return;
       }
+      
+      this._hideEvts.push(this.on("_disappear", this.onDisappear, this));
+      this._hideEvts.push(this.on("_disappeared", this.onDidDisappear, this));
       
       // call onWillDisappear
       this.onWillDisappear();
@@ -216,9 +364,35 @@
         throw new Error('Invalid Request: Cannot unload visible Controller');
       }
       
+      this._unloadEvts.push(this.on("_unload", this.onUnload, this));
+      this._unloadEvts.push(this.on("_unloaded", this.onDidUnload, this));
+      
       // call onWillUnload
       this.onWillUnload();
       
+    },
+    
+    _appendTo: function(target) {
+      if (target instanceof Controller) {
+        target._target.append(this._target);
+      } else {
+        target.append(this._target);
+      }
+      this.next();
+    },
+    
+    _append: function(target) {
+      if (target instanceof Controller) {
+        this._target.append(target._target);
+      } else {
+        this._target.append(target);
+      }
+      this.next();
+    },
+    
+    _remove: function() {
+      this._target.remove();
+      this.next();
     },
     
     
@@ -258,6 +432,13 @@
       // mark as loaded
       this._loaded = true;
       
+      // unbind events
+      for (var i = 0, len = this._loadEvts.length; i < len; i++) {
+        this._loadEvts[i].detach();
+      }
+      
+      this._loadEvts = [];
+            
       // fire public load event
       this.fire('load');
       
@@ -300,6 +481,13 @@
       // mark unloaded
       this._loaded = false;
       
+      // unbind events
+      for (var i = 0, len = this._unloadEvts.length; i < len; i++) {
+        this._unloadEvts[i].detach();
+      }
+      
+      this._unloadEvts = [];
+      
       // fire public unload event
       this.fire('unload');
       
@@ -327,9 +515,10 @@
         
         var node = target[1];
         var delegate = target[2];
+        var eventName;
         
         var touchclick = Browser.touch ? 'touchend' : 'click';
-        
+
         // if $target
         if (node === '$target') {
           node = this._target;
@@ -346,18 +535,20 @@
         // bind events
         for (var event in events) {
           if (event === 'touchclick') {
-            event = touchclick;
+            eventName = touchclick;
+          } else {
+            eventName = event;
           }
           if (typeof events[event] === 'function') {
             if (delegate && node instanceof Element) {
-              node.on(event, delegate, proxy(events[event], this));
+              node.on(eventName, delegate, proxy(events[event], this));
             } else if (node instanceof Controller) {
-              node.on(event, events[event], this);
+              node.on(eventName, events[event], this);
             } else {
-              node.on(event, proxy(events[event], this));
+              node.on(eventName, proxy(events[event], this));
             }
           }
-        }
+        }        
       
       }
       
@@ -400,6 +591,13 @@
 
       // mark as visible
       this._visible = true;
+  
+      // unbind events
+      for (var i = 0, len = this._showEvts.length; i < len; i++) {
+        this._showEvts[i].detach();
+      }
+      
+      this._showEvts = [];
       
       // fire public appear event
       this.fire('appear');
@@ -410,18 +608,18 @@
     },
     
     onWillDisappear: function() {
-
+            
       // unbind events
       for (var view in this._views) { this.getView(view).detach(); }
       for (var elem in this._elems) { this.getElement(elem).off(); }
-      
+            
       // fire disappear event
       this.fire('_disappear');
       
     },
     
     onDisappear: function(e) {
-            
+                        
       var count = Object.keys(this._views).length;
       
       // hide children
@@ -447,12 +645,19 @@
       // remove hidden class
       this._target.addClass('hidden');
       
+      // unbind events
+      for (var i = 0, len = this._hideEvts.length; i < len; i++) {
+        this._hideEvts[i].detach();
+      }
+      
+      this._hideEvts = [];
+      
       // mark as hidden
       this._visible = false;
       
       // fire public disappear event
       this.fire('disappear');
-      
+            
       // call next
       this.next();
     
@@ -468,6 +673,10 @@
       } else if (args.length === 2) {
         this._attrs[args[0]] = args[1];
       }
+    },
+    
+    find: function() {
+      return this._target.find.apply(this._target, arguments);
     },
     
     
@@ -498,17 +707,20 @@
     
     /** Adhoc References */
     
-    addView: function(control, name, template) {
+    addView: function(c, control, name, template, location) {
       if (this.hasView(name)) {
         throw new Error('Invalid Request: Controller ' + name + ' already exists');
       }
-      var c = Controller.get(control);
-      var v = View.get(template, control, name);
-      if (c) {
-        this._views[name] = new c(this, v, this.app);
+      if (!c) {
+        throw 'Invalid Controller';
       }
-      this._target.append(this._views[name]._target);
-      return this._views[name];
+      var v = View.get(template, control, name);
+      this._views[name] = new c(this, v, this.app);
+      if (location === 'body') {
+        $('body').append(this._views[name]._target);
+      } else {
+        this._target.append(this._views[name]._target);
+      }
     },
     
     removeView: function(name) {
@@ -518,6 +730,49 @@
       }
     },
     
+    
+    /** Parameters */
+    
+    setParam: function(name, value) {
+      this._params[name] = value;
+    },
+    
+    getParam: function(name) {
+      return this._params[name];
+    },
+    
+    clearParam: function(name) {
+      delete this._params[name];
+    },
+    
+    bindData: function(name, entity, multi) {
+      var target = (name === '$target') ? this._target : this.getElement(name);
+      var children = target.childrenTo('[itemprop]');
+      var prop;
+      var data = {};
+      if (entity instanceof Orange.Entity) {
+        data = entity.toObject();
+      } else {
+        data = entity;
+      }
+      for (var i=0; i<children.length; i++) {
+        prop = children[i].attr('itemprop');
+        if (prop) {
+          if (children[i].get(0).tagName === 'IMG') {
+            if (data.hasOwnProperty(prop)) {
+              children[i].attr('src', data[prop]);
+            }
+          } else if (children[i].get(0).tagName === 'SELECT' || children[i].get(0).tagName === 'INPUT') {
+            if (data.hasOwnProperty(prop)) {
+              children[i].val(data[prop]);
+            }
+          } else {
+            if (data.hasOwnProperty(prop)) { children[i].text(data[prop]);
+            } else if (!multi) { children[i].text(''); }
+          }
+        }
+      }
+    },
     
     /** Connection Management */
   
@@ -550,21 +805,6 @@
       this._target.addClass(attrs.name);
       
       return attrs;
-      
-    },
-    
-    setupTransitions: function() {
-            
-      if (this._initialized) { return; }
-    
-      this.on('_load', this.onLoad, this);
-      this.on('_loaded', this.onDidLoad, this);
-      this.on('_appear', this.onAppear, this);
-      this.on('_appeared', this.onDidAppear, this);
-      this.on('_disappear', this.onDisappear, this);
-      this.on('_disappeared', this.onDidDisappear, this);
-      this.on('_unload', this.onUnload, this);
-      this.on('_unloaded', this.onDidUnload, this);
       
     },
     
@@ -638,7 +878,7 @@
       
     },
   
-  }).include(Events).include(Queue);
+  }).include(Events);
   
   
   /** Class Methods */

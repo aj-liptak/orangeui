@@ -24,7 +24,7 @@
       var next = this._queue.shift();
       if (next) {
         next.fn.apply(this, next.args);
-        if (next.wait > 0) {
+        if (next.wait !== undefined) {
           this._process = setTimeout(proxy(function() {
             this.next();
           }, this), next.wait);

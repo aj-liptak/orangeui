@@ -31,11 +31,18 @@
     
     Loader.add = function(name, fn, requires) {
       
-      console.log('Adding Module: ' + name);
+      //console.log('Adding Module: ' + name);
       
       // split name
       var parts = name.split('.'), part;
       var cursor = modules;
+      
+      // prevent loops
+      for (var i=0; i<requires.length; i++) {
+        if (name.match(new RegExp(requires[i] + '(\\.|$)'))) {
+          throw 'Invalid Module Dependencies: Infinite Loop';
+        }
+      }
       
       // create object
       var module = new Module(name, fn, requires);
@@ -52,13 +59,11 @@
           cursor = cursor[part];             
         }
       }
-      
+            
     };
     
     Loader.use = function(name) {
-      
-      console.log('Using Module: ' + name);
-      
+            
       // split name
       var parts = name.split('.'), part;
       var cursor = modules;
@@ -68,7 +73,7 @@
         if (cursor.hasOwnProperty(part)) {
           cursor = cursor[part];
         } else {
-          throw 'Module not found';  
+          throw 'Module "' + name + '" not found';  
         }
       }
             
@@ -81,10 +86,8 @@
 
       if (module instanceof Module) {
         if (Loader.loaded(module.name)) {
-          console.log('Duplicate Load', module.name);
           return;
         }
-        console.log('Loading Module: ' + module.name);
         for (var i=0; i<module.requires.length; i++) {
           Loader.use(module.requires[i]);
         }
@@ -94,10 +97,8 @@
         module.fn.call(this, Orange);
         delete Orange.export;
       } else if (typeof module === 'object') {
-        console.log('Loading Module Collection');
         for (var name in module) {
           Loader.load(module[name]);
-          console.log('3');
         }
       }
       
@@ -119,7 +120,6 @@
         } else if (parts.length === 0) {
           cursor[part] = object;
           cursor = cursor[part];
-          console.log('Exporting Module: ' + name, active);
         } else {
           cursor[part] = {}; 
           cursor = cursor[part];  
@@ -152,15 +152,13 @@
       // split name
       var parts = name.split('.'), part;
       var cursor = active;
-      
-      console.log('Requiring: ' + name);
-       
+             
       // look for module
       while (part = parts.shift()) {
         if (cursor.hasOwnProperty(part)) {
           cursor = cursor[part];
         } else {
-          throw 'Module not found';
+          throw 'Module "' + name + '" Not Loaded';
         }
       }
        

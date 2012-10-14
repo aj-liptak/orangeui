@@ -21,7 +21,7 @@
     },
     
     getPath: function() {
-      return '';
+      return this.path;
     },
     
     goOnline: function() {
@@ -35,19 +35,20 @@
     request: function(path, method, params, map, success, failure, context) {
       
       if (!success || !failure) {
-        throw { type: 'Invalid Request', message: 'Missing callback function' };
+        throw 'Invalid Request: Missing callback function';
       }
       
       map = map || function(data) { return data; };
       context = context || this;
-      
+      var mapContext = this;
+            
       $.ajax({
-        url: this.getPrefix() + path,
+        url: this.getPath() + path,
         type: method,
         timeout: 60000,
         data: params,
         success: function(data) {
-          if (data === null) {
+          if (data === null || data === 'null') {
             failure.call(context);
             return;
           }
@@ -59,7 +60,7 @@
           }
           var clean;
           try {
-            clean = map.call(context, data);
+            clean = map.call(mapContext, data);
           } catch(ex) {
             failure.call(context, ex);
             throw ex;
@@ -87,6 +88,33 @@
       }
       
     },
+    
+    mapArray: function(items, entity, map) {
+    
+      var data = [];
+      var item;
+      
+      if (items instanceof Array) {
+        for (var i=0; i<items.length; i++) {
+          data.push(this.mapObject(items[i], entity, map));
+        }
+      }
+            
+      return data;
+    
+    },
+    
+    mapObject: function(item, entity, map) {
+      var data = {};
+      for (var field in map) {
+        if (item.hasOwnProperty(map[field])) {
+          data[field] = item[map[field]];
+        }
+      }
+      var ent = new entity(data);
+      //console.log('Mapping Object: ', ent);
+      return ent;
+    }
   
   });
     
